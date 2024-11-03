@@ -1,0 +1,14 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate x:Key="CrematoryTemplate">
+        <TextBlock Text="Интерфейс для Крематорий" FontSize="20" Foreground="Blue"/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ScheduleTemplate">
+        <TextBlock Text="Интерфейс для Розклад" FontSize="20" Foreground="Green"/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ServicesTemplate">
+        <TextBlock Text="Интерфейс для Послуги" FontSize="20" Foreground="Red"/>
+    </DataTemplate>
+</ResourceDictionary>

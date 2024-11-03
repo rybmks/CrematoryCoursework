@@ -1,0 +1,58 @@
+﻿<Window x:Class="Crematory.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Crematory"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="727">
+    <Grid Background="#FFD580">
+        <Border MinWidth="400" MaxWidth="600" Margin="15,0,15,0" Background="#FFFFFF" VerticalAlignment="Center" Padding="30, 30, 30, 20" CornerRadius="20" Height="246">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="Black" ShadowDepth="0" />
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="Мережа крематоріїв 'Прометей'" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="0, 0, 0, 20"/>
+
+                <Grid Margin="40,0,40,20">
+                    <Button Content="Існуючі запити" 
+                            Width="150" Height="50" 
+                            HorizontalAlignment="Left" 
+                            HorizontalContentAlignment="Center" 
+                            VerticalContentAlignment="Center" 
+                            Margin="0, 0,0,0"/>
+
+                    <Button Content="Створити запис" 
+                            Width="150" Height="50" 
+                            HorizontalAlignment="Right" 
+                            HorizontalContentAlignment="Center" 
+                            VerticalContentAlignment="Center" 
+                            Margin="0,0,0,0"/>
+                </Grid>
+
+                <Grid Margin="40, 20, 40, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Content="Адмін-панель" 
+                            Width="183" Height="46" 
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Center" 
+                            VerticalContentAlignment="Center" 
+                            Style="{StaticResource MaterialDesignOutlinedButton}" 
+                            Grid.Column="0" Click="ToAdminPanel" Cursor="Hand" />
+
+                    <Button Content="Крематорії та розклад" 
+                            Width="183" Height="46" 
+                            HorizontalAlignment="Right"
+                            HorizontalContentAlignment="Center" 
+                            VerticalContentAlignment="Center" 
+                            Style="{StaticResource MaterialDesignOutlinedButton}" 
+                            Grid.Column="1" />
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
