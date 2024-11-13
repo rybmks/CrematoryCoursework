@@ -3,24 +3,104 @@
   "WorkspaceRootPath": "E:\\KPI\\Crematory\\Crematory\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\viewmodels\\adminpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\viewmodels\\adminpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\views\\userinterface\\createorderwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\views\\userinterface\\createorderwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\viewmodels\\adminpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\viewmodels\\adminpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\views\\userinterface\\createorderwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\views\\userinterface\\createorderwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\viewmodels\\templates.xaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\viewmodels\\templates.xaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\views\\adminpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\views\\adminpanel.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\views\\adminpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\views\\adminpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\views\\addeditschedulepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\views\\addeditschedulepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\views\\addeditschedulepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\views\\addeditschedulepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\dataaccess\\sqlqueries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\dataaccess\\sqlqueries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\viewmodels\\adminpanelviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\viewmodels\\adminpanelviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\viewmodels\\addeditcrematoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\viewmodels\\addeditcrematoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\viewmodels\\addeditserviceviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\viewmodels\\addeditserviceviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\models\\crematoryschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\models\\crematoryschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\models\\servicemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\models\\servicemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\viewmodels\\addeditscheduleviewmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\viewmodels\\addeditscheduleviewmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\dataaccess\\getdataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\dataaccess\\getdataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\dataaccess\\insertdataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\dataaccess\\insertdataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\dataaccess\\updatedataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\dataaccess\\updatedataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\views\\addeditservicenotepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\views\\addeditservicenotepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\views\\addeditpagesstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\views\\addeditpagesstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\views\\addeditcrematorypage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\views\\addeditcrematorypage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\views\\addeditcrematorypage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\views\\addeditcrematorypage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\dataaccess\\deletedataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\dataaccess\\deletedataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|e:\\kpi\\crematory\\crematory\\crematory\\models\\\u0441rematorymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D00D6BC-ECF1-4B7B-9425-358655F1D381}|Crematory\\Crematory.csproj|solutionrelative:crematory\\models\\\u0441rematorymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,69 +110,325 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Templates.xaml",
-              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\Templates.xaml",
-              "RelativeDocumentMoniker": "Crematory\\ViewModels\\Templates.xaml",
-              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\Templates.xaml",
-              "RelativeToolTip": "Crematory\\ViewModels\\Templates.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-10-31T22:04:51.63Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AdminPanel.xaml.cs",
-              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\AdminPanel.xaml.cs",
-              "RelativeDocumentMoniker": "Crematory\\ViewModels\\AdminPanel.xaml.cs",
-              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\AdminPanel.xaml.cs*",
-              "RelativeToolTip": "Crematory\\ViewModels\\AdminPanel.xaml.cs*",
-              "ViewState": "AgIAABwAAAAAAAAAAAAgwDQAAAAAAAAAAAAAAA==",
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "Crematory\\AssemblyInfo.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\AssemblyInfo.cs",
+              "RelativeToolTip": "Crematory\\AssemblyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-31T19:24:22.377Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AdminPanel.xaml",
-              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\AdminPanel.xaml",
-              "RelativeDocumentMoniker": "Crematory\\ViewModels\\AdminPanel.xaml",
-              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\AdminPanel.xaml*",
-              "RelativeToolTip": "Crematory\\ViewModels\\AdminPanel.xaml*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-10-31T19:09:28.481Z",
+              "WhenOpened": "2024-11-11T23:30:56.826Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Crematory\\MainWindow.xaml.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Crematory\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAmwCQAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T23:28:50.193Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreateOrderWindow.xaml.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\UserInterface\\CreateOrderWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Crematory\\Views\\UserInterface\\CreateOrderWindow.xaml.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\UserInterface\\CreateOrderWindow.xaml.cs",
+              "RelativeToolTip": "Crematory\\Views\\UserInterface\\CreateOrderWindow.xaml.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAD4vxkAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T23:26:30.731Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\MainWindow.xaml",
               "RelativeDocumentMoniker": "Crematory\\MainWindow.xaml",
               "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\MainWindow.xaml",
               "RelativeToolTip": "Crematory\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-10-31T15:30:27.276Z",
+              "WhenOpened": "2024-11-11T23:06:28.273Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Crematory\\MainWindow.xaml.cs",
-              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\MainWindow.xaml.cs",
-              "RelativeToolTip": "Crematory\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAMwBoAAAA3AAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "CreateOrderWindow.xaml",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\UserInterface\\CreateOrderWindow.xaml",
+              "RelativeDocumentMoniker": "Crematory\\Views\\UserInterface\\CreateOrderWindow.xaml",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\UserInterface\\CreateOrderWindow.xaml",
+              "RelativeToolTip": "Crematory\\Views\\UserInterface\\CreateOrderWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-11T22:00:28.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AdminPanel.xaml",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AdminPanel.xaml",
+              "RelativeDocumentMoniker": "Crematory\\Views\\AdminPanel.xaml",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AdminPanel.xaml",
+              "RelativeToolTip": "Crematory\\Views\\AdminPanel.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-11T19:10:17.528Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CrematorySchedule.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Models\\CrematorySchedule.cs",
+              "RelativeDocumentMoniker": "Crematory\\Models\\CrematorySchedule.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Models\\CrematorySchedule.cs",
+              "RelativeToolTip": "Crematory\\Models\\CrematorySchedule.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-31T15:30:25.123Z",
+              "WhenOpened": "2024-11-11T20:38:16.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SqlQueries.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\DataAccess\\SqlQueries.cs",
+              "RelativeDocumentMoniker": "Crematory\\DataAccess\\SqlQueries.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\DataAccess\\SqlQueries.cs",
+              "RelativeToolTip": "Crematory\\DataAccess\\SqlQueries.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAACqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T18:40:53.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AddEditSchedulePage.xaml.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AddEditSchedulePage.xaml.cs",
+              "RelativeDocumentMoniker": "Crematory\\Views\\AddEditSchedulePage.xaml.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AddEditSchedulePage.xaml.cs",
+              "RelativeToolTip": "Crematory\\Views\\AddEditSchedulePage.xaml.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAIwC0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T18:27:07.754Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AdminPanel.xaml.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AdminPanel.xaml.cs",
+              "RelativeDocumentMoniker": "Crematory\\Views\\AdminPanel.xaml.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AdminPanel.xaml.cs",
+              "RelativeToolTip": "Crematory\\Views\\AdminPanel.xaml.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA1wFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T17:24:33.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AddEditCrematoryViewModel.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\AddEditCrematoryViewModel.cs",
+              "RelativeDocumentMoniker": "Crematory\\ViewModels\\AddEditCrematoryViewModel.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\AddEditCrematoryViewModel.cs",
+              "RelativeToolTip": "Crematory\\ViewModels\\AddEditCrematoryViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBQAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T18:34:38.432Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AddEditSchedulePage.xaml",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AddEditSchedulePage.xaml",
+              "RelativeDocumentMoniker": "Crematory\\Views\\AddEditSchedulePage.xaml",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AddEditSchedulePage.xaml",
+              "RelativeToolTip": "Crematory\\Views\\AddEditSchedulePage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-11T18:26:42.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AddEditServiceViewModel.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\AddEditServiceViewModel.cs",
+              "RelativeDocumentMoniker": "Crematory\\ViewModels\\AddEditServiceViewModel.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\AddEditServiceViewModel.cs",
+              "RelativeToolTip": "Crematory\\ViewModels\\AddEditServiceViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T18:34:35.012Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AddEditScheduleViewModule.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\AddEditScheduleViewModule.cs",
+              "RelativeDocumentMoniker": "Crematory\\ViewModels\\AddEditScheduleViewModule.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\AddEditScheduleViewModule.cs",
+              "RelativeToolTip": "Crematory\\ViewModels\\AddEditScheduleViewModule.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T18:34:25.414Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AdminPanelViewModel.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\AdminPanelViewModel.cs",
+              "RelativeDocumentMoniker": "Crematory\\ViewModels\\AdminPanelViewModel.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\ViewModels\\AdminPanelViewModel.cs",
+              "RelativeToolTip": "Crematory\\ViewModels\\AdminPanelViewModel.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T18:35:05.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ServiceModel.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Models\\ServiceModel.cs",
+              "RelativeDocumentMoniker": "Crematory\\Models\\ServiceModel.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Models\\ServiceModel.cs",
+              "RelativeToolTip": "Crematory\\Models\\ServiceModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T17:59:10.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "InsertDataService.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\DataAccess\\InsertDataService.cs",
+              "RelativeDocumentMoniker": "Crematory\\DataAccess\\InsertDataService.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\DataAccess\\InsertDataService.cs",
+              "RelativeToolTip": "Crematory\\DataAccess\\InsertDataService.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAEsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T17:44:11.628Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "UpdateDataService.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\DataAccess\\UpdateDataService.cs",
+              "RelativeDocumentMoniker": "Crematory\\DataAccess\\UpdateDataService.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\DataAccess\\UpdateDataService.cs",
+              "RelativeToolTip": "Crematory\\DataAccess\\UpdateDataService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAADoAAABWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T18:47:04.475Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "GetDataService.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\DataAccess\\GetDataService.cs",
+              "RelativeDocumentMoniker": "Crematory\\DataAccess\\GetDataService.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\DataAccess\\GetDataService.cs",
+              "RelativeToolTip": "Crematory\\DataAccess\\GetDataService.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAwwEUAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T17:41:54.232Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AddEditPagesStatus.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AddEditPagesStatus.cs",
+              "RelativeDocumentMoniker": "Crematory\\Views\\AddEditPagesStatus.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AddEditPagesStatus.cs",
+              "RelativeToolTip": "Crematory\\Views\\AddEditPagesStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T17:24:45.573Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "AddEditCrematoryPage.xaml",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AddEditCrematoryPage.xaml",
+              "RelativeDocumentMoniker": "Crematory\\Views\\AddEditCrematoryPage.xaml",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AddEditCrematoryPage.xaml",
+              "RelativeToolTip": "Crematory\\Views\\AddEditCrematoryPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-11T17:19:35.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "AddEditCrematoryPage.xaml.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AddEditCrematoryPage.xaml.cs",
+              "RelativeDocumentMoniker": "Crematory\\Views\\AddEditCrematoryPage.xaml.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AddEditCrematoryPage.xaml.cs",
+              "RelativeToolTip": "Crematory\\Views\\AddEditCrematoryPage.xaml.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAcwBgAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T18:33:24.754Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "AddEditServiceNotePage.xaml",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AddEditServiceNotePage.xaml",
+              "RelativeDocumentMoniker": "Crematory\\Views\\AddEditServiceNotePage.xaml",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Views\\AddEditServiceNotePage.xaml",
+              "RelativeToolTip": "Crematory\\Views\\AddEditServiceNotePage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-11T19:16:33.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "DeleteDataService.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\DataAccess\\DeleteDataService.cs",
+              "RelativeDocumentMoniker": "Crematory\\DataAccess\\DeleteDataService.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\DataAccess\\DeleteDataService.cs",
+              "RelativeToolTip": "Crematory\\DataAccess\\DeleteDataService.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAEgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T17:44:49.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "\u0421rematoryModel.cs",
+              "DocumentMoniker": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Models\\\u0421rematoryModel.cs",
+              "RelativeDocumentMoniker": "Crematory\\Models\\\u0421rematoryModel.cs",
+              "ToolTip": "E:\\KPI\\Crematory\\Crematory\\Crematory\\Models\\\u0421rematoryModel.cs",
+              "RelativeToolTip": "Crematory\\Models\\\u0421rematoryModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T18:38:34.465Z",
               "EditorCaption": ""
             }
           ]

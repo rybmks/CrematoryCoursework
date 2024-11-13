@@ -27,7 +27,9 @@
                             HorizontalAlignment="Right" 
                             HorizontalContentAlignment="Center" 
                             VerticalContentAlignment="Center" 
-                            Margin="0,0,0,0"/>
+                            Margin="0,0,0,0"
+                            Click="CreateNote_Click"
+                            />
                 </Grid>
 
                 <Grid Margin="40, 20, 40, 0">

@@ -1,5 +1,4 @@
-﻿using Crematory.ViewModels;
-using System.Text;
+﻿using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,6 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Crematory.Views;
+using Crematory.Views.UserInterface;
 
 namespace Crematory
 {
@@ -24,9 +25,16 @@ namespace Crematory
 
         private void ToAdminPanel(object sender, RoutedEventArgs e)
         {
-            AdminPanel adminPanel = new AdminPanel(this);
+            AdminPanel adminPanel = new AdminPanel();
             adminPanel.Show();
-            this.Hide();
+            this.Close();
+        }
+
+        private void CreateNote_Click(object sender, RoutedEventArgs e)
+        {
+            CreateOrderWindow createOrder = new CreateOrderWindow();
+            createOrder.Show();
+            this.Close();
         }
     }
 }
