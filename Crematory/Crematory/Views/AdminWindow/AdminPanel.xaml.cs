@@ -1,9 +1,10 @@
-﻿using Crematory.Models;
-using Crematory.ViewModels;
+﻿using Crematory.DataAccess;
+using Crematory.Models;
+using Crematory.ViewModels.AdminWindow;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Crematory.Views
+namespace Crematory.Views.AdminWindow
 {
     public partial class AdminPanel : Window
     {
@@ -11,7 +12,7 @@ namespace Crematory.Views
         public AdminPanel()
         {
             InitializeComponent();
-            _viewModel = new AdminPanelViewModel();
+            _viewModel = new AdminPanelViewModel(new ServiceRepository(), new CrematoryRepository(), new ScheduleRepository());
 
             DataContext = _viewModel;
         }

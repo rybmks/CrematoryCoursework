@@ -1,20 +1,10 @@
-﻿using Crematory.Models;
-using Crematory.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Crematory.DataAccess;
+using Crematory.Models;
+using Crematory.ViewModels.AdminWindow;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Crematory.enums;
 
-namespace Crematory.Views
+namespace Crematory.Views.AdminWindow
 {
     /// <summary>
     /// Логика взаимодействия для AddEditSchedulePage.xaml
@@ -22,14 +12,14 @@ namespace Crematory.Views
     public partial class AddEditSchedulePage : Window
     {
         private CrematoryScheduleModel _currentSchedule = new CrematoryScheduleModel();
-        private readonly AddEditScheduleViewModule _viewModel = new AddEditScheduleViewModule();
-        private readonly PageFunctionStatus _status;
+        private readonly AddEditScheduleViewModule _viewModel = new AddEditScheduleViewModule(new ScheduleRepository());
+        private readonly EditingPagesStatus _status;
 
         public AddEditSchedulePage(int crematoryId)
         {
             InitializeComponent();
 
-            _status = PageFunctionStatus.AddNewNote;
+            _status = EditingPagesStatus.AddNewNote;
             _currentSchedule.CrematoryId = crematoryId;
             DataContext = _currentSchedule;
             DeleteButton.Visibility = Visibility.Hidden;
@@ -37,7 +27,7 @@ namespace Crematory.Views
         public AddEditSchedulePage(CrematoryScheduleModel schedule)
         {
             InitializeComponent();
-            _status = PageFunctionStatus.EditNote;
+            _status = EditingPagesStatus.EditNote;
 
             DeleteButton.Visibility = Visibility.Visible;
             _currentSchedule = schedule;
@@ -61,7 +51,6 @@ namespace Crematory.Views
         }
         public async void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-
             if (!ValidateData(_currentSchedule))
                 return;
 
@@ -74,24 +63,32 @@ namespace Crematory.Views
             if (result == MessageBoxResult.No)
                 return;
 
-            bool operationResult;
-            if (_status == PageFunctionStatus.AddNewNote)
+            try
             {
-                operationResult = await _viewModel.AddSchedule(_currentSchedule);
-            }
-            else
-            {
-                operationResult = await _viewModel.UpdateSchedule(_currentSchedule);
-            }
-            string message = operationResult
-                 ? "Операція пройшла успішно."
-                 : "Виникла помилка при виконанні операції. Переконайтесь, що новий розклад не накладається на вже існуючі записи.";
+                bool operationResult;
+                if (_status == EditingPagesStatus.AddNewNote)
+                {
+                    operationResult = await _viewModel.AddSchedule(_currentSchedule);
+                }
+                else
+                {
+                    operationResult = await _viewModel.UpdateSchedule(_currentSchedule);
+                }
+                string message = operationResult
+                     ? "Операція пройшла успішно."
+                     : "Виникла помилка при виконанні операції. Переконайтесь, що новий розклад не накладається на вже існуючі записи.";
 
-            MessageBox.Show(message, operationResult ? "Успіх" : "Помилка",
-                MessageBoxButton.OK,
-                operationResult ? MessageBoxImage.Information : MessageBoxImage.Warning);
-           
-            Back();
+                MessageBox.Show(message, operationResult ? "Успіх" : "Помилка",
+                    MessageBoxButton.OK,
+                    operationResult ? MessageBoxImage.Information : MessageBoxImage.Warning);
+
+                Back();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
         }
         private void Back()
         {

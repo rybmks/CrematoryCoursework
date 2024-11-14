@@ -1,20 +1,10 @@
-﻿using Crematory.Models;
-using Crematory.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Crematory.DataAccess;
+using Crematory.Models;
+using Crematory.ViewModels.AdminWindow;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Crematory.enums;
 
-namespace Crematory.Views
+namespace Crematory.Views.AdminWindow
 {
     /// <summary>
     /// Логика взаимодействия для AddEditCrematoryPage.xaml
@@ -22,21 +12,21 @@ namespace Crematory.Views
     public partial class AddEditCrematoryPage : Window
     {
         private CrematoryModel _currentCrematory = new CrematoryModel();
-        private readonly AddEditCrematoryViewModel _viewModel = new AddEditCrematoryViewModel();
-        private readonly PageFunctionStatus _status;
+        private readonly AddEditCrematoryViewModel _viewModel = new AddEditCrematoryViewModel(new CrematoryRepository());
+        private readonly EditingPagesStatus _status;
 
         public AddEditCrematoryPage()
         {
             InitializeComponent();
 
-            _status = PageFunctionStatus.AddNewNote;
+            _status = EditingPagesStatus.AddNewNote;
             DataContext = _currentCrematory;
             DeleteButton.Visibility = Visibility.Hidden;
         }
         public AddEditCrematoryPage(CrematoryModel crematory)
         {
             InitializeComponent();
-            _status = PageFunctionStatus.EditNote;
+            _status = EditingPagesStatus.EditNote;
 
             DeleteButton.Visibility = Visibility.Visible;
             _currentCrematory = crematory;
@@ -74,18 +64,26 @@ namespace Crematory.Views
             if (result == MessageBoxResult.No)
                 return;
 
-            bool operationResult;
-            if (_status == PageFunctionStatus.AddNewNote)
+            try
             {
-                operationResult = await _viewModel.AddCrematory(_currentCrematory);
-            }
-            else
-            {
-                operationResult = await _viewModel.UpdateCrematory(_currentCrematory);
-            }
-            MessageBox.Show(operationResult ? "Операція пройшла успішно" : "Виникла помилка при виконанні операції");
+                bool operationResult;
+                if (_status == EditingPagesStatus.AddNewNote)
+                {
+                    operationResult = await _viewModel.AddCrematory(_currentCrematory);
+                }
+                else
+                {
+                    operationResult = await _viewModel.UpdateCrematory(_currentCrematory);
+                }
+                MessageBox.Show(operationResult ? "Операція пройшла успішно" : "Виникла помилка при виконанні операції");
 
-            Back();
+                Back();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
         }
         private void Back()
         {

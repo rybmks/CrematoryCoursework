@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Crematory.Views.UserInterface"
         mc:Ignorable="d"
-        Title="CreateOrderWindow" MinHeight="700" MinWidth="981" Height="589" Width="859">
+        IsVisibleChanged="Page_VisibleChanged"
+        Title="CreateOrderWindow" MinHeight="700" MinWidth="981" Height="761" Width="859">
     <Grid Background="#FFD580" >
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -106,14 +107,14 @@
                 FontSize="20"
                 FontWeight="Bold"/>
 
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="10" Background="LightGray"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="10" Background="LightGray"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="10" Background="LightGray"/>
-            <ComboBox Grid.Row="4" Grid.Column="1" Margin="10" Background="LightGray" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="10" Background="LightGray" Text="{Binding DeceasedData.FullName}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="10" Background="LightGray" Text="{Binding DeceasedData.DeathDate}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="10" Background="LightGray" Text="{Binding DeceasedData.BirthDate}"/>
+            <ComboBox Grid.Row="4" Grid.Column="1" Margin="10" Background="LightGray" ItemsSource="{Binding Gender}"  Text="{Binding DeceasedData.Gender}"/>
 
-            <TextBox Grid.Row="1" Grid.Column="3" Margin="10" Background="LightGray"/>
-            <TextBox Grid.Row="2" Grid.Column="3" Margin="10" Background="LightGray"/>
-            <TextBox Grid.Row="3" Grid.Column="3" Margin="10" Background="LightGray"/>
+            <TextBox Grid.Row="1" Grid.Column="3" Margin="10" Background="LightGray" Text="{Binding ContactPersonData.FullName}" />
+            <TextBox Grid.Row="2" Grid.Column="3" Margin="10" Background="LightGray" Text="{Binding ContactPersonData.PhoneNumber}"/>
+            <TextBox Grid.Row="3" Grid.Column="3" Margin="10" Background="LightGray" Text="{Binding ContactPersonData.Address}"/>
 
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
@@ -121,6 +122,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
+
                 <RowDefinition/>
                 <RowDefinition/>
 
@@ -134,23 +137,14 @@
             </Grid.ColumnDefinitions>
 
             <Label
-                Content="Час початку:"
-                Grid.Row="0"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="15"
-                FontWeight="Bold"/>
-            <Label
-                Content="Орієнтона тривалість:"
+                Content="Дата:"
                 Grid.Row="1"
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 FontSize="15"
                 FontWeight="Bold"/>
-            <Label
-                Content="Крематорій:"
+            <Label Content="Оберіть вільний час:"
                 Grid.Row="2"
                 Grid.Column="0"
                 VerticalAlignment="Center"
@@ -158,8 +152,24 @@
                 FontSize="15"
                 FontWeight="Bold"/>
             <Label
-                Content="Початкова ціна:"
+                Content="Орієнтона тривалість:"
                 Grid.Row="3"
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontSize="15"
+                FontWeight="Bold"/>
+            <Label
+                Content="Крематорій:"
+                Grid.Row="0"
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontSize="15"
+                FontWeight="Bold"/>
+            <Label
+                Content="Початкова ціна:"
+                Grid.Row="4"
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
@@ -175,20 +185,42 @@
                 FontSize="25"
                 FontWeight="Bold"/>
 
-            <TextBox Grid.Column="1" Grid.Row="0" Margin="10" Background="LightGray"/>
-            <TextBox Grid.Column="1" Grid.Row="1" Margin="10" Background="LightGray"/>
-            <ComboBox Grid.Column="1" Grid.Row="2" Margin="10" Background="LightGray"/>
-            <TextBox Grid.Column="1" Grid.Row="3" Margin="10" Background="LightGray"/>
+            <DatePicker Grid.Row="1" Grid.Column="1" x:Name="DateInput" 
+            SelectedDate="{Binding OrderData.CremationDateTime, Mode=TwoWay}" 
+            Height="30" 
+            Margin="10,19,10,19" Background="LightGray"
+            SelectedDateChanged="Date_Changed"/>
+
+            <ComboBox Grid.Row="2" Grid.Column="1" Background="LightGray" Margin="10,0,10,0" />
+            <TextBox Grid.Column="1" Grid.Row="3" Margin="10" Background="LightGray" Text="{Binding OrderData.CremationDuration, StringFormat=hh\\:mm}"/>
+            <ComboBox x:Name="CrematorySelect" SelectedItem="{Binding SelectedCrematory, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" Margin="10" Background="LightGray" ItemsSource="{Binding CrematoryData}" DisplayMemberPath="Name"/>
+            <TextBox x:Name="DurationField" Grid.Column="1" Grid.Row="4" Margin="10" Background="LightGray" Text="{Binding OrderData.StandardPrice, Mode=TwoWay}"/>
             <DataGrid 
                 Margin="0 0 15 0"
                 Grid.Row="1" 
                 Grid.Column="2" 
                 Grid.ColumnSpan="3" 
-                Grid.RowSpan="3">
+                Grid.RowSpan="4"
+                IsReadOnly="True"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding ServiceData}">
 
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Назва" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Ціна" Binding="{Binding Price}" />
+                    <DataGridTemplateColumn Header="Обрати">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox>
+
+                                </CheckBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
             </DataGrid>
-            <Button Grid.Row="4" Grid.Column="2" Content="Додати" FontSize="20" Height="45"/>
-            <Button Grid.Row="4" Grid.Column="4" Content="Назад" FontSize="20" Height="45" Click="BackToMain" Margin="0 0 10 0"/>
+            <Button Grid.Row="5" Grid.Column="2" Content="Додати" FontSize="20" Height="45" Click="SubmitButton_Click"/>
+            <Button Grid.Row="5" Grid.Column="4" Content="Назад" FontSize="20" Height="45" Click="BackToMain" Margin="0 0 10 0"/>
         </Grid>
     </Grid>
 </Window>

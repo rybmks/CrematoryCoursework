@@ -1,18 +1,27 @@
-﻿using Crematory.DataAccess;
-using Crematory.DatabaseServices;
-using Crematory.Models;
-using Crematory.Views;
+﻿using Crematory.Models;
+using Crematory.Interfaces;
+using Crematory.DataAccess;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 
-namespace Crematory.ViewModels
+
+namespace Crematory.ViewModels.AdminWindow
 {
     public class AdminPanelViewModel
     {
+        private readonly IServiceRepository _serviceRepository;
+        private readonly ICrematoryRepository _crematoryRepository;
+        private readonly IScheduleRepository _scheduleRepository;
+
+
+        public AdminPanelViewModel(
+            IServiceRepository serviceRepository,
+            ICrematoryRepository crematoryRepository,
+            IScheduleRepository scheduleRepository)
+        {
+            _serviceRepository = serviceRepository ?? throw new ArgumentNullException(nameof(serviceRepository));
+            _crematoryRepository = crematoryRepository ?? throw new ArgumentNullException(nameof(crematoryRepository));
+            _scheduleRepository = scheduleRepository ?? throw new ArgumentNullException(nameof(scheduleRepository));
+        }
         public ObservableCollection<ServiceModel> ServiceData { get; set; } = new ObservableCollection<ServiceModel>();
         public ObservableCollection<CrematoryModel> CrematoryData { get; set; } = new ObservableCollection<CrematoryModel>();
         public ObservableCollection<CrematoryScheduleModel> CrematoryScheduleData { get; set; } = new ObservableCollection<CrematoryScheduleModel>();
@@ -21,7 +30,7 @@ namespace Crematory.ViewModels
         {
             ServiceData.Clear();
 
-            var services = await GetDataService.GetServicesDataAsync();
+            var services = await _serviceRepository.GetAllServicesAsync();
 
             foreach (var item in services)
             {
@@ -32,7 +41,7 @@ namespace Crematory.ViewModels
         {
             CrematoryData.Clear();
 
-            var crematories = await GetDataService.GetCrematoryDataAsync();
+            var crematories = await _crematoryRepository.GetAllCrematoriesAsync();
             
             foreach (var item in crematories)
             {
@@ -43,7 +52,7 @@ namespace Crematory.ViewModels
         {
             CrematoryScheduleData.Clear();
 
-            var schedule = await GetDataService.GetScheduleForCrematoryAsync(crematory.Id);
+            var schedule = await _scheduleRepository.GetScheduleForCrematoryAsync(crematory.Id);
 
             foreach (var item in schedule)
             {
