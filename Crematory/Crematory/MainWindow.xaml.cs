@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Crematory.Views;
+using Crematory.Views.AdminWindow;
 using Crematory.Views.UserInterface;
 
 namespace Crematory
@@ -22,7 +22,6 @@ namespace Crematory
         {
             InitializeComponent();
         }
-
         private void ToAdminPanel(object sender, RoutedEventArgs e)
         {
             AdminPanel adminPanel = new AdminPanel();

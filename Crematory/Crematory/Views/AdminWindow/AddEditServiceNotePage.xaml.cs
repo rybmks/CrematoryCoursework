@@ -1,20 +1,10 @@
-﻿using Crematory.Models;
-using Crematory.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Crematory.DataAccess;
+using Crematory.Models;
+using Crematory.ViewModels.AdminWindow;
+using Crematory.enums;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace Crematory.Views
+namespace Crematory.Views.AdminWindow
 {
     /// <summary>
     /// Логика взаимодействия для AddEditServiceNotePage.xaml
@@ -23,21 +13,21 @@ namespace Crematory.Views
     public partial class AddEditServiceNotePage : Window
     {
         private ServiceModel _currentService = new ServiceModel();
-        private readonly AddEditServiceViewModel _viewModel = new AddEditServiceViewModel();
-        private readonly PageFunctionStatus _status;
+        private readonly AddEditServiceViewModel _viewModel = new AddEditServiceViewModel(new ServiceRepository());
+        private readonly EditingPagesStatus _status;
 
         public AddEditServiceNotePage()
         {
             InitializeComponent();
 
-            _status = PageFunctionStatus.AddNewNote;
+            _status = EditingPagesStatus.AddNewNote;
             DataContext = _currentService;
             DeleteButton.Visibility = Visibility.Hidden;
         }
         public AddEditServiceNotePage(ServiceModel service)
         {
             InitializeComponent();
-            _status = PageFunctionStatus.EditNote;
+            _status = EditingPagesStatus.EditNote;
 
             DeleteButton.Visibility = Visibility.Visible;
             _currentService = service;
@@ -75,18 +65,27 @@ namespace Crematory.Views
             if (result == MessageBoxResult.No)
                 return;
 
-            bool operationResult;
-            if (_status == PageFunctionStatus.AddNewNote)
+            try
             {
-                operationResult = await _viewModel.AddService(_currentService);
-            }
-            else
-            {
-                operationResult = await _viewModel.UpdateService(_currentService);
-            }
-            MessageBox.Show(operationResult ? "Операція пройшла успішно" : "Виникла помилка при виконанні операції");
+                bool operationResult;
+                if (_status == EditingPagesStatus.AddNewNote)
+                {
+                    operationResult = await _viewModel.AddService(_currentService);
+                }
+                else
+                {
+                    operationResult = await _viewModel.UpdateService(_currentService);
+                }
+                MessageBox.Show(operationResult ? "Операція пройшла успішно" : "Виникла помилка при виконанні операції");
 
-            Back();
+                Back();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
         }
         private void Back()
         {

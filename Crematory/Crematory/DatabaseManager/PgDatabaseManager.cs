@@ -40,7 +40,7 @@ namespace Crematory.DataAccess
             {
                 await transaction.RollbackAsync();
 
-                throw new InvalidOperationException("Помилка під час виконання транзакції.", e);
+                throw new InvalidOperationException($"Помилка: {e.Message}.", e);
             }
 
             return rowsAffected;
@@ -82,7 +82,6 @@ namespace Crematory.DataAccess
             }
             catch (Exception e) 
             {
-
                 throw new InvalidOperationException("Помилка під час виконання транзакції.", e);
             }
 
