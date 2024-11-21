@@ -1,20 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Crematory.ViewModels.CreateOrder;
+﻿using Crematory.ViewModels.CreateOrder;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Crematory.DataAccess;
-using Crematory.enums;
-using Crematory.Models;
+using Crematory.Interfaces;
 
 namespace Crematory.Views.UserInterface
 {
@@ -31,7 +18,8 @@ namespace Crematory.Views.UserInterface
             _viewModel = new CreateOrderViewModel(
                 new ServiceRepository(), new CrematoryRepository(), 
                 new DeceasedRepository(), new ContactPersonRepository(),
-                new ScheduleRepository());
+                new ScheduleRepository(),
+                new OrderRepository());
             
             DataContext = _viewModel;
         }
@@ -57,7 +45,7 @@ namespace Crematory.Views.UserInterface
         {
             await _viewModel.CreateOrderNote();
         }
-        private async void Date_Changed(object sender, SelectionChangedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             await _viewModel.LoadFreeTimeAsync();
         }

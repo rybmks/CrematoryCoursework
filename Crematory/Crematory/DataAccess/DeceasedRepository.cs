@@ -2,7 +2,7 @@
 using Crematory.Models;
 using System.Configuration;
 using Npgsql;
-using Crematory.DatabaseServices;
+using Crematory.DatabaseManager;
 using System.Data.Common;
 
 namespace Crematory.DataAccess
@@ -16,7 +16,7 @@ namespace Crematory.DataAccess
             var command = new NpgsqlCommand(SqlQueries.DeleteDeceased);
             command.Parameters.AddWithValue("Id", id);
 
-            var res = await db.ExecuteQueriesAsync(new List<DbCommand>() { command });
+            var res = await db.ExecuteCommandAsync([command]);
 
             if (res.Any() && res.First() > 0)
             {
@@ -37,9 +37,9 @@ namespace Crematory.DataAccess
             command.Parameters.AddWithValue("FullName", deceased.FullName);
             command.Parameters.AddWithValue("BirthDate", deceased.BirthDate);
             command.Parameters.AddWithValue("DeathDate", deceased.DeathDate);
-            command.Parameters.AddWithValue("Gender", deceased.Gender);
+            command.Parameters.AddWithValue("Gender", deceased.Gender.ToString());
 
-            var res = await db.ExecuteQueriesAsync(new List<DbCommand>() { command });
+            var res = await db.ExecuteCommandAsync([command]);
 
             if (res.Any() && res.First() > 0) 
             {
@@ -57,16 +57,15 @@ namespace Crematory.DataAccess
 
             var command = new NpgsqlCommand(SqlQueries.GetDeceasedId);
 
-            command.Parameters.AddWithValue("FullName", deceased.FullName);
-            command.Parameters.AddWithValue("BirthDate", deceased.BirthDate);
-            command.Parameters.AddWithValue("DeathDate", deceased.DeathDate);
-            command.Parameters.AddWithValue("Gender", deceased.Gender);
+            command.Parameters.AddWithValue("@FullName", deceased.FullName);
+            command.Parameters.AddWithValue("@BirthDate", deceased.BirthDate);
+            command.Parameters.AddWithValue("@DeathDate", deceased.DeathDate);
 
-            var res = await db.GetNotesAsync<int>(command);
-            if (res == null || res.First() <= 0)
+            var res = await db.FetchSingleIntAsync(command);
+            if (res <= 0)
                 return -1;
             else
-                return res.First();
+                return res;
             
         }
     }

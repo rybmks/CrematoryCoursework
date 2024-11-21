@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Crematory.DatabaseServices;
+﻿using System.Configuration;
+using Crematory.DatabaseManager;
 using Crematory.Interfaces;
 using Crematory.Models;
 using Npgsql;
@@ -18,7 +13,7 @@ namespace Crematory.DataAccess
             var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
             var command = new NpgsqlCommand(SqlQueries.GetAllCrematoryServices);
 
-            var services = await db.GetNotesAsync<ServiceModel>(command);
+            var services = await db.FetchRecordsAsync<ServiceModel>(command);
 
             return (List<ServiceModel>)services;
         }
@@ -34,7 +29,7 @@ namespace Crematory.DataAccess
             command.Parameters.AddWithValue("@Price", service.Price);
             command.Parameters.AddWithValue("@Id", service.Id);
 
-            var res = await db.ExecuteQueriesAsync(new List<NpgsqlCommand> { command });
+            var res = await db.ExecuteCommandAsync(new List<NpgsqlCommand> { command });
 
             if (!res.Any() || res.First() == 0)
             {
@@ -54,7 +49,7 @@ namespace Crematory.DataAccess
             command.Parameters.AddWithValue("@Name", service.Name);
             command.Parameters.AddWithValue("@Price", service.Price);
 
-            var res = await db.ExecuteQueriesAsync(new List<NpgsqlCommand> { command });
+            var res = await db.ExecuteCommandAsync(new List<NpgsqlCommand> { command });
 
             if (!res.Any() || res.First() == 0)
             {
@@ -70,7 +65,7 @@ namespace Crematory.DataAccess
 
             command.Parameters.AddWithValue("@Id", id);
 
-            var res = await db.ExecuteQueriesAsync(new List<NpgsqlCommand> { command });
+            var res = await db.ExecuteCommandAsync(new List<NpgsqlCommand> { command });
 
             if (!res.Any() || res.First() == 0)
             {

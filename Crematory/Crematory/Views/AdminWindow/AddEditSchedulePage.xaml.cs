@@ -1,5 +1,6 @@
-﻿using Crematory.DataAccess;
+﻿using Crematory.Interfaces;
 using Crematory.Models;
+using Crematory.DataAccess;
 using Crematory.ViewModels.AdminWindow;
 using System.Windows;
 using Crematory.enums;
@@ -76,7 +77,7 @@ namespace Crematory.Views.AdminWindow
                 }
                 string message = operationResult
                      ? "Операція пройшла успішно."
-                     : "Виникла помилка при виконанні операції. Переконайтесь, що новий розклад не накладається на вже існуючі записи.";
+                     : "Виникла помилка при виконанні операції. Переконайтесь, що розкладу за цей день ще не існує.";
 
                 MessageBox.Show(message, operationResult ? "Успіх" : "Помилка",
                     MessageBoxButton.OK,

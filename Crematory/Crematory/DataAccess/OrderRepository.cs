@@ -1,14 +1,9 @@
-﻿using Crematory.DatabaseServices;
-using Crematory.Interfaces;
+﻿using Crematory.Interfaces;
 using Crematory.Models;
 using Npgsql;
-using System;
-using System.Collections.Generic;
+using Crematory.DatabaseManager;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.Data;
 
 namespace Crematory.DataAccess
 {
@@ -21,7 +16,7 @@ namespace Crematory.DataAccess
 
             command.Parameters.AddWithValue("@Id", id);
 
-            var res = await db.ExecuteQueriesAsync(new List<NpgsqlCommand> { command });
+            var res = await db.ExecuteCommandAsync(new List<NpgsqlCommand> { command });
 
             if (!res.Any() || res.First() == 0)
             {
@@ -35,9 +30,15 @@ namespace Crematory.DataAccess
             var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
             var command = new NpgsqlCommand(SqlQueries.GetAllOrders);
 
-            var orders = await db.GetNotesAsync<OrderModel>(command);
+            var orders = await db.FetchRecordsAsync<OrderModel>(command);
 
             return (List<OrderModel>)orders;
+        }
+
+        public async Task<IDbTransaction> BeginTransactionAsync()
+        {
+            var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
+            return await db.BeginTransactionAsync();
         }
         public async Task<bool> InsertOrderAsync(OrderModel order)
         {
@@ -55,7 +56,7 @@ namespace Crematory.DataAccess
             command.Parameters.AddWithValue("@OrderDate", order.OrderDate);
             command.Parameters.AddWithValue("@CremationDateTime", order.CremationDateTime);
 
-            var res = await db.ExecuteQueriesAsync(new List<NpgsqlCommand> { command });
+            var res = await db.ExecuteCommandAsync(new List<NpgsqlCommand> { command });
 
             if (!res.Any() || res.First() == 0)
             {
@@ -80,7 +81,7 @@ namespace Crematory.DataAccess
             command.Parameters.AddWithValue("@Id", order.Id);
             command.Parameters.AddWithValue("@CremationDateTime", order.CremationDateTime);
 
-            var res = await db.ExecuteQueriesAsync(new List<NpgsqlCommand> { command });
+            var res = await db.ExecuteCommandAsync(new List<NpgsqlCommand> { command });
 
             if (!res.Any() || res.First() == 0)
             {

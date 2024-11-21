@@ -6,200 +6,178 @@
         xmlns:local="clr-namespace:Crematory.Views.UserInterface"
         mc:Ignorable="d"
         IsVisibleChanged="Page_VisibleChanged"
-        Title="CreateOrderWindow" MinHeight="700" MinWidth="981" Height="761" Width="859">
-    <Grid Background="#FFD580" >
+        Title="CreateOrderWindow" MinHeight="700" MinWidth="981" Height="887" Width="859">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid Background="#FFD580" >
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition/>
+            <ColumnDefinition Width="491*" />
+            <ColumnDefinition Width="449*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+        <Grid Grid.Row="0" Margin="10" Grid.ColumnSpan="3">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <Label
-                Content="Дані про померлого"
-                Grid.Row="0"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="25"
-                FontWeight="Bold"/>
-            <Label
-                Content="Контактна особа"
-                Grid.Row="0"
-                Grid.Column="2"
-                Grid.ColumnSpan="2"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="25"
-                FontWeight="Bold"/>
-            <Label
-                Content="Ім'я"
-                Grid.Row="1"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"/>
-            <Label
-                Content="Ім'я"
-                Grid.Row="1"
-                Grid.Column="2"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"/>
-            <Label
-                Content="Дата смерті"
-                Grid.Row="2"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"/>
-            <Label
-                Content="Телефон"
-                Grid.Row="2"
-                Grid.Column="2"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"/>
-            <Label
-                Content="Дата народження"
-                Grid.Row="3"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"/>
-            <Label
-                Content="Адреса"
-                Grid.Row="3"
-                Grid.Column="2"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"/>
-            <Label
-                Content="Стать"
-                Grid.Row="4"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"/>
 
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="10" Background="LightGray" Text="{Binding DeceasedData.FullName}"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="10" Background="LightGray" Text="{Binding DeceasedData.DeathDate}"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="10" Background="LightGray" Text="{Binding DeceasedData.BirthDate}"/>
-            <ComboBox Grid.Row="4" Grid.Column="1" Margin="10" Background="LightGray" ItemsSource="{Binding Gender}"  Text="{Binding DeceasedData.Gender}"/>
+            <Label Content="Дані про померлого" 
+                   Grid.Row="0" Grid.Column="0"
+                   HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+            <Label Content="Контактна особа" 
+                   Grid.Row="0" Grid.Column="1"
+                   HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
 
-            <TextBox Grid.Row="1" Grid.Column="3" Margin="10" Background="LightGray" Text="{Binding ContactPersonData.FullName}" />
-            <TextBox Grid.Row="2" Grid.Column="3" Margin="10" Background="LightGray" Text="{Binding ContactPersonData.PhoneNumber}"/>
-            <TextBox Grid.Row="3" Grid.Column="3" Margin="10" Background="LightGray" Text="{Binding ContactPersonData.Address}"/>
+            <Grid Grid.Row="1" Grid.Column="0" Margin="0,10,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Ім'я:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding DeceasedData.FullName}" />
 
+                <Label Content="Дата смерті:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                    <DatePicker Grid.Row="1" Grid.Column="1" Margin="5" SelectedDate="{Binding DeathDateForPicker, Mode=TwoWay}" />
+
+                <Label Content="Дата народження:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                    <DatePicker Grid.Row="2" Grid.Column="1" Margin="5" SelectedDate="{Binding BirthDateForPicker, Mode=TwoWay}" />
+
+                <Label Content="Стать:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+                    <ComboBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding DeceasedData.Gender}" >
+                        <ComboBoxItem Content="Male"/>
+                        <ComboBoxItem Content="Female"/>
+                    </ComboBox>
+                </Grid>
+            <Grid Grid.Row="1" Grid.Column="1" Margin="10,10,0,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Ім'я:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding ContactPersonData.FullName}" />
+
+                <Label Content="Телефон:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding ContactPersonData.PhoneNumber}" />
+
+
+                <Label Content="Адреса:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding ContactPersonData.Address}" />
+            </Grid>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Height="649" VerticalAlignment="Bottom">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="20*"/>
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="99*" />
+                <ColumnDefinition Width="97*" />
+                <ColumnDefinition Width="98*" />
+                <ColumnDefinition Width="98*" />
+                <ColumnDefinition Width="98*" />
             </Grid.ColumnDefinitions>
-
-            <Label
-                Content="Дата:"
-                Grid.Row="1"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="15"
-                FontWeight="Bold"/>
-            <Label Content="Оберіть вільний час:"
-                Grid.Row="2"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="15"
-                FontWeight="Bold"/>
-            <Label
-                Content="Орієнтона тривалість:"
-                Grid.Row="3"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="15"
-                FontWeight="Bold"/>
-            <Label
-                Content="Крематорій:"
-                Grid.Row="0"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="15"
-                FontWeight="Bold"/>
-            <Label
-                Content="Початкова ціна:"
-                Grid.Row="4"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="15"
-                FontWeight="Bold"/>
+            <DataGrid
+                Margin="10,10,10,10"
+                Grid.Row="2" Grid.RowSpan="2"
+                Grid.Column="0" Grid.ColumnSpan="2"
+                ItemsSource="{Binding FreeTime}"
+                AutoGenerateColumns="False"
+                IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding StartTime, StringFormat='hh\\:mm'}" Header="Початок"/>
+                    <DataGridTextColumn Binding="{Binding EndTime, StringFormat='hh\\:mm'}" Header="Кінець"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <Label
                 Content="Додаткові послуги"
-                Grid.Row="0"
-                Grid.Column="2"
-                Grid.ColumnSpan="3"
+                Grid.Column="3"
+                Grid.ColumnSpan="2"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Left"
                 FontSize="25"
-                FontWeight="Bold"/>
+                FontWeight="Bold" Height="41" Width="237" Margin="77,0,0,0"/>
 
-            <DatePicker Grid.Row="1" Grid.Column="1" x:Name="DateInput" 
-            SelectedDate="{Binding OrderData.CremationDateTime, Mode=TwoWay}" 
-            Height="30" 
-            Margin="10,19,10,19" Background="LightGray"
-            SelectedDateChanged="Date_Changed"/>
+            <Grid 
+                Margin="10"
+                Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <ComboBox Grid.Row="2" Grid.Column="1" Background="LightGray" Margin="10,0,10,0" />
-            <TextBox Grid.Column="1" Grid.Row="3" Margin="10" Background="LightGray" Text="{Binding OrderData.CremationDuration, StringFormat=hh\\:mm}"/>
-            <ComboBox x:Name="CrematorySelect" SelectedItem="{Binding SelectedCrematory, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" Margin="10" Background="LightGray" ItemsSource="{Binding CrematoryData}" DisplayMemberPath="Name"/>
-            <TextBox x:Name="DurationField" Grid.Column="1" Grid.Row="4" Margin="10" Background="LightGray" Text="{Binding OrderData.StandardPrice, Mode=TwoWay}"/>
+                <Label Content="Крематорій:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CrematorySelect" SelectedItem="{Binding SelectedCrematory, Mode=TwoWay}" Grid.Column="1" Margin="10,0,10,0" ItemsSource="{Binding CrematoryData}" DisplayMemberPath="Name" Height="25"/>
+
+                <Label Content="Дата:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                <DatePicker Grid.Row="1" Grid.Column="1" x:Name="DateInput" 
+                    SelectedDate="{Binding OrderData.CremationDateTime, Mode=TwoWay}" 
+                    Margin="10,19,10,13" Background="LightGray"/>
+                <Button 
+                     Content="Завантажити вільний час"
+                     Grid.Row="2"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     FontSize="15"
+                    Grid.ColumnSpan="2" Click="Button_Click"
+     />
+            </Grid>
+
+
+            <Grid Grid.Row="4" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Час:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding CremationTime, StringFormat=hh\\:mm}" />
+
+                <Label Content="Орієнтовна тривалісь:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding OrderData.CremationDuration, StringFormat=hh\\:mm}" />
+
+                <Label Content="Початкова ціна:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding OrderData.StandardPrice}" />
+            </Grid>
+
             <DataGrid 
-                Margin="0 0 15 0"
-                Grid.Row="1" 
-                Grid.Column="2" 
-                Grid.ColumnSpan="3" 
+                Margin="10" 
+                Grid.Row="1"
+                Grid.Column="3" 
+                Grid.ColumnSpan="2" 
                 Grid.RowSpan="4"
                 IsReadOnly="True"
                 AutoGenerateColumns="False"
@@ -219,8 +197,9 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Grid.Row="5" Grid.Column="2" Content="Додати" FontSize="20" Height="45" Click="SubmitButton_Click"/>
-            <Button Grid.Row="5" Grid.Column="4" Content="Назад" FontSize="20" Height="45" Click="BackToMain" Margin="0 0 10 0"/>
+            <Button Grid.Row="9" Grid.Column="1" Content="Додати" FontSize="20" Click="SubmitButton_Click" Grid.ColumnSpan="3" Margin="194,14,196,15"/>
+            <Button Grid.Row="9" Grid.Column="4" Content="Назад" FontSize="20" Click="BackToMain" Margin="0,14,10,15"/>
         </Grid>
     </Grid>
+    </ScrollViewer>
 </Window>

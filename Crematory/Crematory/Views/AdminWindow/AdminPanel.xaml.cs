@@ -1,5 +1,6 @@
-﻿using Crematory.DataAccess;
+﻿using Crematory.Interfaces;
 using Crematory.Models;
+using Crematory.DataAccess;
 using Crematory.ViewModels.AdminWindow;
 using System.Windows;
 using System.Windows.Controls;

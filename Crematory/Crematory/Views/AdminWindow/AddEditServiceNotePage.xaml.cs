@@ -1,5 +1,6 @@
-﻿using Crematory.DataAccess;
+﻿using Crematory.Interfaces;
 using Crematory.Models;
+using Crematory.DataAccess;
 using Crematory.ViewModels.AdminWindow;
 using Crematory.enums;
 using System.Windows;
@@ -12,7 +13,7 @@ namespace Crematory.Views.AdminWindow
     /// 
     public partial class AddEditServiceNotePage : Window
     {
-        private ServiceModel _currentService = new ServiceModel();
+        private ServiceModel _currentService = new();
         private readonly AddEditServiceViewModel _viewModel = new AddEditServiceViewModel(new ServiceRepository());
         private readonly EditingPagesStatus _status;
 
@@ -107,7 +108,7 @@ namespace Crematory.Views.AdminWindow
         {
             Back();
         }
-        private bool ValidateData(ServiceModel service)
+        private static bool ValidateData(ServiceModel service)
         {
             if (String.IsNullOrWhiteSpace(service.Name)) 
             {
