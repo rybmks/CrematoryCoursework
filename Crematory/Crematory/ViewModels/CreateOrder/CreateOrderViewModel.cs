@@ -1,22 +1,56 @@
-﻿using Crematory.DataAccess;
-using Crematory.Models;
-using Crematory.enums;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Crematory.enums;
 using Crematory.Interfaces;
-using System.Windows;
-using System.Text.RegularExpressions;
+using Crematory.Models;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
+using System.Transactions;
+using System.Windows;
 
 namespace Crematory.ViewModels.CreateOrder
 {
-    public class CreateOrderViewModel : INotifyPropertyChanged
+    public class CreateOrderViewModel(
+        IServiceRepository serviceRepository, ICrematoryRepository crematoryRepository,
+        IDeceasedRepository deceasedRepository, IContactPersonRepository contactPersonRepository,
+        IScheduleRepository sheduleRepository, IOrderRepository orderRepository) : INotifyPropertyChanged
     {
-        private CrematoryModel _selectedCrematory = new CrematoryModel();
+        private const EditingPagesStatus addNewNote = EditingPagesStatus.AddNewNote;
+        private readonly IScheduleRepository _scheduleRepository = sheduleRepository;
+        private readonly IServiceRepository _serviceRepository = serviceRepository;
+        private readonly ICrematoryRepository _crematoryRepository = crematoryRepository;
+        private readonly IDeceasedRepository _deceasedRepository = deceasedRepository;
+        private readonly IContactPersonRepository _contactPersonRepository = contactPersonRepository;
+        private readonly IOrderRepository _orderRepository = orderRepository;
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public DateTime? DeathDateForPicker
+        {
+            get => DeceasedData.DeathDate.ToDateTime(TimeOnly.MinValue);
+            set
+            {
+                if (value.HasValue)
+                {
+                    DeceasedData.DeathDate = DateOnly.FromDateTime(value.Value);
+                    OnPropertyChanged(nameof(DeathDateForPicker));
+                }
+            }
+        }
+        public DateTime? BirthDateForPicker
+        {
+            get => DeceasedData.BirthDate.ToDateTime(TimeOnly.MinValue);
+            set
+            {
+                if (value.HasValue)
+                {
+                    DeceasedData.BirthDate = DateOnly.FromDateTime(value.Value);
+                    OnPropertyChanged(nameof(BirthDateForPicker));
+                }
+            }
+        }
+
+        private CrematoryModel _selectedCrematory = new();
         public CrematoryModel SelectedCrematory
         {
             get => _selectedCrematory;
@@ -29,36 +63,35 @@ namespace Crematory.ViewModels.CreateOrder
                 }
             }
         }
-        public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private EditingPagesStatus status = EditingPagesStatus.AddNewNote;
-        public ObservableCollection<ServiceModel> ServiceData { get; set; } = new ObservableCollection<ServiceModel>();
-        private readonly IServiceRepository _serviceRepository;
-        public ObservableCollection<CrematoryModel> CrematoryData { get; set; } = new ObservableCollection<CrematoryModel>();
-        private readonly ICrematoryRepository _crematoryRepository;
-        public DeceasedModel DeceasedData { get; set; } = new DeceasedModel();
-        private readonly IDeceasedRepository _deceasedRepository;
-        public ContactPersonModel ContactPersonData { get; set; } = new ContactPersonModel();
-        private readonly IContactPersonRepository _contactPersonRepository;
-        public OrderModel OrderData { get; set; } = new OrderModel() { CremationDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)};
-        public readonly IScheduleRepository _scheduleRepository;
-
-        public CreateOrderViewModel(
-            IServiceRepository serviceRepository, ICrematoryRepository crematoryRepository, 
-            IDeceasedRepository deceasedRepository, IContactPersonRepository contactPersonRepository,
-            IScheduleRepository sheduleRepository)
+        private readonly EditingPagesStatus status = addNewNote;
+        public ObservableCollection<ServiceModel> ServiceData { get; set; } = [];
+        public ObservableCollection<CrematoryModel> CrematoryData { get; set; } = [];
+        public DeceasedModel DeceasedData { get; set; } = new DeceasedModel()
         {
-            _serviceRepository = serviceRepository;
-            _crematoryRepository = crematoryRepository;
-            _deceasedRepository = deceasedRepository;
-            _contactPersonRepository = contactPersonRepository;
-            _scheduleRepository = sheduleRepository;
+            BirthDate = DateOnly.FromDateTime(DateTime.Today),
+            DeathDate = DateOnly.FromDateTime(DateTime.Today)
+        };
+        public ContactPersonModel ContactPersonData { get; set; } = new ContactPersonModel();
+        public OrderModel OrderData { get; set; } = new OrderModel() { CremationDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) };
+        private ObservableCollection<TimePeriod> _freeTime = [];
+        public TimeOnly CremationTime { get; set; } = new TimeOnly();
+        public ObservableCollection<TimePeriod> FreeTime
+        {
+            get => _freeTime;
+            set
+            {
+                if (_freeTime != value)
+                {
+                    _freeTime = value;
+                    OnPropertyChanged(nameof(FreeTime));
+                }
+            }
         }
-
 
         public async Task LoadServicesAsync()
         {
@@ -84,8 +117,49 @@ namespace Crematory.ViewModels.CreateOrder
         {
             if (!IsInputsValid())
                 return;
+
+            using var transaction = await _orderRepository.BeginTransactionAsync(); 
+
             try
             {
+
+                var freeTime = await GetFreeTime();
+                if (freeTime.Count <= 0)
+                    return;
+                
+                var temp = OrderData.CremationDateTime;
+                OrderData.CremationDateTime = new DateTime(
+                    temp.Year,
+                    temp.Month,
+                    temp.Day,
+                    CremationTime.Hour,
+                    CremationTime.Minute,
+                    CremationTime.Second
+                );
+
+
+                var StartTime = TimeOnly.FromDateTime(OrderData.CremationDateTime);
+                var EndTime = TimeOnly.FromDateTime(OrderData.CremationDateTime.Add(OrderData.CremationDuration));
+
+                bool isWithinFreeTime = false;
+
+                foreach (var timeSlot in freeTime)
+                {
+                    if (StartTime >= timeSlot.StartAsTimeOnly() &&
+                        EndTime <= timeSlot.EndAsTimeOnly())
+                    {
+                        isWithinFreeTime = true;
+                        break;
+                    }
+                }
+
+                if (!isWithinFreeTime)
+                {
+                    MessageBox.Show("Час кремації має бути в межах доступного часу!");
+                    return;
+                }
+
+               
                 var deceasedId = await _deceasedRepository.GetDeceasedIdAsync(DeceasedData);
 
                 if (deceasedId <= 0)
@@ -113,14 +187,30 @@ namespace Crematory.ViewModels.CreateOrder
                         return;
                     }
                 }
+               
 
                 if (status == EditingPagesStatus.AddNewNote)
                 {
                     OrderData.OrderDate = DateOnly.FromDateTime(DateTime.Now);
                     OrderData.ContactPersonId = contactPersonId;
                     OrderData.DeceasedId = deceasedId;
+                    OrderData.CrematoryId = SelectedCrematory.Id;
 
-                    MessageBox.Show(OrderData.ToString());
+                    var res = await _orderRepository.InsertOrderAsync(OrderData);
+
+                    if (!res)
+                    {
+                        MessageBox.Show("Виникла помилка під час додавання даних про замовлення!");
+                        transaction.Rollback();
+
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Операція пройла успішно!");
+                        transaction.Commit();
+                        return;
+                    }
                 }
                 else
                 {
@@ -129,36 +219,44 @@ namespace Crematory.ViewModels.CreateOrder
             }
             catch (Exception ex)
             {
+                transaction.Rollback();
                 MessageBox.Show($"Помилка {ex.Message}");
             }
         }
         public async Task LoadFreeTimeAsync()
         {
-            //var DayOfWeek = OrderData.CremationDateTime.DayOfWeek;
-            //if (SelectedCrematory == null)
-            //{
-            //    MessageBox.Show("Оберіть крематорій!");
-            //    return;
-            //}
+            FreeTime.Clear();
 
-            //var crematoryId = SelectedCrematory.Id;
-            //if (crematoryId <= 0)
-            //{
-            //    MessageBox.Show("Оберіть крематорій!");
-            //    return;
-            //}
+            var freeTime = await GetFreeTime();
 
-            //var schedule = await _scheduleRepository.GetCrematoryScheduleForDayAsync(crematoryId, OrderData.OrderDate.DayOfWeek);
+            if (freeTime.Count <= 0)
+                return;
 
-            //MessageBox.Show(schedule.ToString());
+            foreach (var t in freeTime)
+            {
+                FreeTime.Add(t);
+            }
+        }
+        private async Task<List<TimePeriod>> GetFreeTime()
+        {
+            var DayOfWeek = OrderData.CremationDateTime.DayOfWeek;
+            if (SelectedCrematory == null)
+            {
+                MessageBox.Show("Оберіть крематорій!");
+                return []; ;
+            }
+
+            var crematoryId = SelectedCrematory.Id;
+            if (crematoryId <= 0)
+            {
+                MessageBox.Show("Оберіть крематорій!");
+                return [];
+            }
+
+            return await _scheduleRepository.GetFreeTimeAsync(crematoryId, DateOnly.FromDateTime(OrderData.CremationDateTime));
         }
         private bool IsInputsValid()
         {
-            if (SelectedCrematory == null|| SelectedCrematory.Id <= 0)
-            {
-                MessageBox.Show("Оберіть крематорій!");
-                return false;
-            }
             if (DeceasedData.FullName == null || DeceasedData.FullName.Length < 0)
             {
                 MessageBox.Show("Введіть ім'я померлого!");
@@ -169,14 +267,9 @@ namespace Crematory.ViewModels.CreateOrder
                 MessageBox.Show("Введіть ім'я контактної особи!");
                 return false;
             }
-            if (DeceasedData.Gender < 0)
+            if (!IsDateOnlyValid(DeceasedData.BirthDate) || !IsDateOnlyValid(DeceasedData.DeathDate))
             {
-                MessageBox.Show("Оберіть стать померлого!");
-                return false;
-            }
-            if (OrderData.StandardPrice <= 0)
-            {
-                MessageBox.Show("Введіть початкову ціну послуги!");
+                MessageBox.Show("Неправильний формат дати! (Дані про померлого)");
                 return false;
             }
             if (ContactPersonData.PhoneNumber == null || (!Regex.IsMatch(ContactPersonData.PhoneNumber, @"^\+380\d{9}$") &&
@@ -190,38 +283,53 @@ namespace Crematory.ViewModels.CreateOrder
                 MessageBox.Show("Введіть адресу контактної особи!");
                 return false;
             }
-            if (!IsDateTimeValid(OrderData.CremationDateTime))
+            if (DeceasedData.Gender < 0)
             {
-                MessageBox.Show("Неправильний формат дати (Дата початку)!");
+                MessageBox.Show("Оберіть стать померлого!");
                 return false;
             }
-            if (!IsDateOnlyValid(DeceasedData.BirthDate) || !IsDateOnlyValid(DeceasedData.DeathDate))
+            if (SelectedCrematory == null || SelectedCrematory.Id <= 0)
             {
-                MessageBox.Show("Неправильний формат дати!");
+                MessageBox.Show("Оберіть крематорій!");
+                return false;
+            }
+
+            if (!IsDateTimeValid(OrderData.CremationDateTime))
+            {
+                MessageBox.Show("Неправильньна дата або час початку!");
+                return false;
+            }
+            if (OrderData.CremationDuration.Hours <= 0)
+            {
+                MessageBox.Show("Неправильньно вказана тривалість!");
+                return false;
+            }
+            if (OrderData.StandardPrice <= 0)
+            {
+                MessageBox.Show("Введіть початкову ціну послуги!");
                 return false;
             }
 
             return true;
+
             bool IsDateTimeValid(DateTime dateTime)
             {
-                if (dateTime.Year == 0 || dateTime.Month == 0 || dateTime.Day == 0 ||
-                     dateTime.Hour == 0 || dateTime.Minute == 0)
+                if (dateTime.Year == 0 || dateTime.Month == 0 || dateTime.Day == 0)
                 {
                     return false;
                 }
 
                 return true;
-           }
-           bool IsDateOnlyValid(DateOnly date)
-           {
-                if (date.Year == 0 || date.Month == 0 || date.Day == 0)
+            }
+            bool IsDateOnlyValid(DateOnly date)
+            {
+                if (date.Year == 1 || date.Month == 0 || date.Day == 0)
                 {
                     return false;
                 }
 
                 return true;
-           }
+            }
         }
-       
     }
 }

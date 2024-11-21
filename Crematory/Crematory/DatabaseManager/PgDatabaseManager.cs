@@ -4,24 +4,18 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using System.Reflection;
-using Crematory.Interfaces;
 using System.Data.Common;
-using System.Linq;
+using Crematory.Interfaces;
 
-namespace Crematory.DataAccess
+namespace Crematory.DatabaseManager
 {
-    public class PgDatabaseManager : IDatabaseManager
+    public class PgDatabaseManager(string connectionString) : IDatabaseManager
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = connectionString;
 
-        public PgDatabaseManager(string connectionString)
+        public async Task<IEnumerable<int>> ExecuteCommandAsync(IEnumerable<DbCommand> commands)
         {
-            _connectionString = connectionString;
-        }
-
-        public async Task<IEnumerable<int>> ExecuteQueriesAsync(IEnumerable<DbCommand> commands)
-        {
-            using NpgsqlConnection connection = new NpgsqlConnection(_connectionString);
+            using NpgsqlConnection connection = new(_connectionString);
             await connection.OpenAsync();
             var transaction = await connection.BeginTransactionAsync();
             var rowsAffected = new List<int>(commands.Count());
@@ -45,39 +39,37 @@ namespace Crematory.DataAccess
 
             return rowsAffected;
         }
-        public async Task<IEnumerable<T>> GetNotesAsync<T>(DbCommand command) where T : new()
+        public async Task<IEnumerable<T>> FetchRecordsAsync<T>(DbCommand command) where T : new()
         {
             using var connection = new NpgsqlConnection(_connectionString);
             command.Connection = connection;
             await connection.OpenAsync();
 
-            List<T> result = new List<T>();
+            List<T> result = [];
             try
             {
-                using (var reader = await command.ExecuteReaderAsync())
+                using var reader = await command.ExecuteReaderAsync();
+                var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+                while (await reader.ReadAsync())
                 {
-                    var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                    var item = new T();
 
-                    while (await reader.ReadAsync())
+                    foreach (var property in properties)
                     {
-                        var item = new T();
+                        var columnName = property.Name;
 
-                        foreach (var property in properties)
-                        {
-                            var columnName = property.Name;
+                        if (!reader.HasColumn(columnName)) continue;
 
-                            if (!reader.HasColumn(columnName)) continue;
+                        var value = reader[columnName];
 
-                            var value = reader[columnName];
+                        if (value == DBNull.Value) continue;
 
-                            if (value == DBNull.Value) continue;
-
-                            var targetType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
-                            property.SetValue(item, Convert.ChangeType(value, targetType));
-                        }
-
-                        result.Add(item);
+                        var targetType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+                        property.SetValue(item, Convert.ChangeType(value, targetType));
                     }
+
+                    result.Add(item);
                 }
             }
             catch (Exception e) 
@@ -86,6 +78,28 @@ namespace Crematory.DataAccess
             }
 
             return result;
+        }
+        public async Task<int> FetchSingleIntAsync(DbCommand command)
+        {
+            using var connection = new NpgsqlConnection(_connectionString);
+            command.Connection = connection;
+            await connection.OpenAsync();
+            try
+            {
+               var result = await command.ExecuteScalarAsync();
+               return result != null ? Convert.ToInt32(result) : 0;
+            }
+            catch (Exception e)
+            {
+
+                throw new InvalidOperationException("Помилка під час виконання транзакції.", e);
+            }
+        }
+        public async Task<IDbTransaction> BeginTransactionAsync()
+        {
+            var connection = new NpgsqlConnection(_connectionString);
+            await connection.OpenAsync();
+            return await connection.BeginTransactionAsync();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Crematory.DataAccess;
-using Crematory.Interfaces;
+﻿using Crematory.Interfaces;
 using Crematory.Models;
 using System;
 using System.Collections.Generic;
@@ -18,7 +17,7 @@ namespace Crematory.ViewModels.AdminWindow
         }
         public async Task<bool> AddSchedule(CrematoryScheduleModel newItem)
         {
-            if (await _repository.IsScheduleIntersectsAsync(newItem))
+            if (await _repository.IsScheduleExistsToday(newItem))
                 return false;
 
             var res = await _repository.InsertScheduleAsync(newItem);
@@ -31,7 +30,7 @@ namespace Crematory.ViewModels.AdminWindow
         }
         public async Task<bool> UpdateSchedule(CrematoryScheduleModel updatedItem)
         {
-            if (await _repository.IsScheduleIntersectsAsync(updatedItem))
+            if (await _repository.IsScheduleExistsToday(updatedItem))
                 return false;
 
             var res = await _repository.UpdateScheduleAsync(updatedItem);

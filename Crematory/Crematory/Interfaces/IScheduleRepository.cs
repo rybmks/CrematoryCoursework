@@ -9,6 +9,7 @@ namespace Crematory.Interfaces
         Task<bool> UpdateScheduleAsync(CrematoryScheduleModel schedule);
         Task<List<CrematoryScheduleModel>> GetScheduleForCrematoryAsync(int crematoryId);
         Task<List<CrematoryScheduleModel>> GetCrematoryScheduleForDayAsync(int crematoryId, DayOfWeek dayOfWeek);
-        Task<bool> IsScheduleIntersectsAsync(CrematoryScheduleModel schedule);
+        Task<bool> IsScheduleExistsToday(CrematoryScheduleModel schedule);
+        Task<List<TimePeriod>> GetFreeTimeAsync(int сrematoryId, DateOnly date);
     }
 }
