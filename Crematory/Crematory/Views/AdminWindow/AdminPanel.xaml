@@ -1,0 +1,153 @@
+﻿<Window
+    x:Class="Crematory.Views.AdminWindow.AdminPanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="AdminPanel" Height="450" Width="600"
+    IsVisibleChanged="Page_VisibleChanged">
+
+    <Grid Background="#FFD580">
+        <TabControl Margin="10">
+            <!-- Вкладка для Послуг -->
+            <TabItem Header="Послуги">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" MinWidth="100" />
+                    </Grid.ColumnDefinitions>
+
+                    <DataGrid x:Name="CrematoryDataGrid"
+                              ItemsSource="{Binding ServiceData}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              Margin="10"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Назва" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="Ціна" Binding="{Binding Price}" />
+                            <DataGridTemplateColumn Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Edit" Click="EditButton_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="20,0">
+                        <Button x:Name="AddServiceNote"
+                                Click="AddServiceNote_Click"
+                                Content="Додати запис" 
+                                Margin="0,0,0,10"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка для Крематоріїв -->
+            <TabItem Header="Крематорії">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" MinWidth="100" />
+                    </Grid.ColumnDefinitions>
+
+                    <DataGrid x:Name="ServicesDataGrid"
+                              ItemsSource="{Binding CrematoryData}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              Margin="10"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Назва" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="Адреса" Binding="{Binding Address}" />
+                            <DataGridTextColumn Header="Контактна інформація" Binding="{Binding ContactInfo}" />
+                            <DataGridTemplateColumn Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Edit" Click="EditButton_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="20,0">
+                        <Button x:Name="AddCrematoryNote"
+                                Click="AddCrematoryNote_Click"
+                                Content="Додати запис" 
+                                Margin="0,0,0,10"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка для Розкладу -->
+            <TabItem Header="Розклад">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Оберіть крематорій" 
+               Grid.Row="0"
+               Grid.Column="0"
+               FontSize="16" 
+               FontWeight="Bold" 
+               Margin="10,0,0,5"/>
+                    <ComboBox Grid.Row="0"
+                  Grid.Column="1"
+                  x:Name="CrematoryComboBox"
+                  SelectionChanged="CrematoryComboBox_SelectionChanged"
+                  Width="180" 
+                  Height="25"
+                  Background="LightGray"
+                  ItemsSource="{Binding CrematoryData}"
+                  DisplayMemberPath="Name"
+                  Margin="0,0,10,5"/>
+
+                    <DataGrid Grid.Row="1" 
+                  IsReadOnly="True"
+                  Grid.Column="0" 
+                  Grid.ColumnSpan="2"
+                  x:Name="ScheduleDataGrid"
+                  ItemsSource="{Binding CrematoryScheduleData}" 
+                  AutoGenerateColumns="False"
+                  Margin="10,5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="День" Binding="{Binding DayOfWeek}" />
+                            <DataGridTextColumn Header="Відкриття" Binding="{Binding OpenTime, StringFormat=hh\\:mm}" />
+                            <DataGridTextColumn Header="Закриття" Binding="{Binding CloseTime, StringFormat=hh\\:mm}" />
+                            <DataGridTemplateColumn Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Edit" Click="EditButton_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Content="Додати розклад"
+                        Click="AddScheduleNote_Click"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        Margin="0,10,10,10"
+                        Width="150" Height="32"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <Button Content="На головну" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
+                Width="150" Height="30" 
+                Margin="10" 
+                Click="BackToMain"/>
+    </Grid>
+</Window>

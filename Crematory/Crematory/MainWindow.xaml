@@ -27,7 +27,9 @@
                             HorizontalAlignment="Right" 
                             HorizontalContentAlignment="Center" 
                             VerticalContentAlignment="Center" 
-                            Margin="0,0,0,0"/>
+                            Margin="0,0,0,0"
+                            Click="CreateNote_Click"
+                            />
                 </Grid>
 
                 <Grid Margin="40, 20, 40, 0">
@@ -39,18 +41,11 @@
                     <Button Content="Адмін-панель" 
                             Width="183" Height="46" 
                             HorizontalAlignment="Left"
+                            Grid.ColumnSpan="2"
                             HorizontalContentAlignment="Center" 
                             VerticalContentAlignment="Center" 
                             Style="{StaticResource MaterialDesignOutlinedButton}" 
-                            Grid.Column="0" Click="ToAdminPanel" Cursor="Hand" />
-
-                    <Button Content="Крематорії та розклад" 
-                            Width="183" Height="46" 
-                            HorizontalAlignment="Right"
-                            HorizontalContentAlignment="Center" 
-                            VerticalContentAlignment="Center" 
-                            Style="{StaticResource MaterialDesignOutlinedButton}" 
-                            Grid.Column="1" />
+                            Grid.Column="0" Click="ToAdminPanel" Cursor="Hand" Margin="139,-6,0,6" />
                 </Grid>
             </StackPanel>
         </Border>
