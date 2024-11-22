@@ -1,4 +1,4 @@
-﻿namespace Crematory.Models
+﻿namespace Crematory.Models.DatabaseModels
 {
     public class ContactPersonModel
     {

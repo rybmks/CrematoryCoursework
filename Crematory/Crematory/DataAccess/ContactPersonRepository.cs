@@ -1,9 +1,9 @@
-﻿using Crematory.Models;
-using Crematory.Interfaces;
+﻿using Crematory.Interfaces;
 using Crematory.DatabaseManager;
 using Npgsql;
 using System.Configuration;
 using System.Data.Common;
+using Crematory.Models.DatabaseModels;
 
 namespace Crematory.DataAccess
 {

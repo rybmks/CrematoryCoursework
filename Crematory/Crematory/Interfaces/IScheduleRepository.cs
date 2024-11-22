@@ -1,4 +1,5 @@
-﻿using Crematory.Models;
+﻿using Crematory.Models.AppModels;
+using Crematory.Models.DatabaseModels;
 
 namespace Crematory.Interfaces
 {

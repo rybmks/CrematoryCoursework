@@ -1,5 +1,5 @@
 ﻿using Crematory.Interfaces;
-using Crematory.Models;
+using Crematory.Models.DatabaseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

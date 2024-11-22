@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crematory.Models
+namespace Crematory.Models.DatabaseModels
 {
     public class DeceasedModel
     {
-        public int Id { get; set;  } 
+        public int Id { get; set; }
         public string? FullName { get; set; }
         public DateOnly BirthDate { get; set; }
         public DateOnly DeathDate { get; set; }

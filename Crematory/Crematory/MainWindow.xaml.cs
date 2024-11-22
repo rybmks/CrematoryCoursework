@@ -35,5 +35,12 @@ namespace Crematory
             createOrder.Show();
             this.Close();
         }
+
+        private void CheckNotes_Click(object sender, RoutedEventArgs e)
+        {
+            CreatedOrders createdOrders = new CreatedOrders();
+            createdOrders.Show();
+            this.Close();
+        }
     }
 }

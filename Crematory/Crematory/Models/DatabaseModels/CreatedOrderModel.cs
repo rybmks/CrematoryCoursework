@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Crematory.Models
 {
-    public class ServiceModel
+    public class CreatedOrderModel
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
-        public decimal Price { get; set; }
+        public int OrderId { get; set; }
+        public DateOnly CompletionDate { get; set; }
+        public string CompletionReason { get; set; } = string.Empty;
     }
 }

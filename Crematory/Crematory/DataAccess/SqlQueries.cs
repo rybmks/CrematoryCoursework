@@ -8,6 +8,11 @@ namespace Crematory.DataAccess
 {
     public static class SqlQueries
     {
+        public const string InsertServiceUsage = "INSERT INTO CustomerServiceUsage (OrderId, \"ServiceId\") VALUES (@OrderId, @ServiceId);";
+        public const string DeleteServiceUsage = "DELETE FROM CustomerServiceUsage WHERE Id = @Id;";
+
+
+        public const string InsertOrderReturningId = "INSERT INTO Orders (CrematoryId, StandardPrice, CremationDuration, DeceasedId, ContactPersonId, OrderDate, CremationDateTime) VALUES (@CrematoryId, @StandardPrice, @CremationDuration, @DeceasedId, @ContactPersonId, @OrderDate, @CremationDateTime) RETURNING Id;";
         public const string InsertOrder = "INSERT INTO Orders (OrderDate, ContactPersonId, DeceasedId, CrematoryId, StandardPrice, CremationDateTime, CremationDuration) VALUES (@OrderDate, @ContactPersonId, @DeceasedId, @CrematoryId, @StandardPrice, @CremationDateTime, @CremationDuration);";
         public const string GetAllOrders = "SELECT * FROM Orders";
         public const string UpdateOrders = "UPDATE Orders SET ContactPerson = @ContactPerson, ContactPersonId = @ContactPersonId, DeceasedId = @DeceasedId,  StandardPrice = @StandardPrice; WHERE Id = @Id";

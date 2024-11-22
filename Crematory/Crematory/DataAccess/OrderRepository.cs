@@ -1,9 +1,9 @@
 ﻿using Crematory.Interfaces;
-using Crematory.Models;
 using Npgsql;
 using Crematory.DatabaseManager;
 using System.Configuration;
 using System.Data;
+using Crematory.Models.DatabaseModels;
 
 namespace Crematory.DataAccess
 {
@@ -34,19 +34,18 @@ namespace Crematory.DataAccess
 
             return (List<OrderModel>)orders;
         }
-
         public async Task<IDbTransaction> BeginTransactionAsync()
         {
             var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
             return await db.BeginTransactionAsync();
         }
-        public async Task<bool> InsertOrderAsync(OrderModel order)
+        public async Task<int> InsertOrderAsync(OrderModel order)
         {
             var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
-            var command = new NpgsqlCommand(SqlQueries.InsertOrder);
+            var command = new NpgsqlCommand(SqlQueries.InsertOrderReturningId);
 
             if (order == null)
-                return false;
+                return -1;
 
             command.Parameters.AddWithValue("@CrematoryId", order.CrematoryId);
             command.Parameters.AddWithValue("@StandardPrice", order.StandardPrice);
@@ -56,14 +55,9 @@ namespace Crematory.DataAccess
             command.Parameters.AddWithValue("@OrderDate", order.OrderDate);
             command.Parameters.AddWithValue("@CremationDateTime", order.CremationDateTime);
 
-            var res = await db.ExecuteCommandAsync(new List<NpgsqlCommand> { command });
-
-            if (!res.Any() || res.First() == 0)
-            {
-                return false;
-            }
-
-            return true;
+            var result = await db.FetchSingleIntAsync(command);
+            
+            return result;
         }
         public async Task<bool> UpdateOrderAsync(OrderModel order)
         {

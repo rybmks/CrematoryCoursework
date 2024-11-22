@@ -2,6 +2,7 @@
 using System.Windows;
 using Crematory.DataAccess;
 using Crematory.Interfaces;
+using Crematory.Models;
 
 namespace Crematory.Views.UserInterface
 {
@@ -49,5 +50,16 @@ namespace Crematory.Views.UserInterface
         {
             await _viewModel.LoadFreeTimeAsync();
         }
+
+        private void GetServicesPrice(object sender, RoutedEventArgs e)
+        {
+            decimal price = _viewModel.GetServicePrice();
+            MessageBox.Show($"Ціна за додаткові послуги: {price}");
+        }
+
+        private void Checkbox_Unchecked(object sender, RoutedEventArgs e) => _viewModel.ChangeCheckboxState(sender, false);
+        
+        private void CheckBox_Checked(object sender, RoutedEventArgs e) => _viewModel.ChangeCheckboxState(sender, true);
+        
     }
 }

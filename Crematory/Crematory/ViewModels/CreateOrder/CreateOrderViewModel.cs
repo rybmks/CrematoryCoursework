@@ -4,8 +4,8 @@ using Crematory.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
-using System.Transactions;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Crematory.ViewModels.CreateOrder
 {
@@ -22,9 +22,7 @@ namespace Crematory.ViewModels.CreateOrder
         private readonly IContactPersonRepository _contactPersonRepository = contactPersonRepository;
         private readonly IOrderRepository _orderRepository = orderRepository;
 
-
         public event PropertyChangedEventHandler? PropertyChanged;
-
         public DateTime? DeathDateForPicker
         {
             get => DeceasedData.DeathDate.ToDateTime(TimeOnly.MinValue);
@@ -79,7 +77,7 @@ namespace Crematory.ViewModels.CreateOrder
         public ContactPersonModel ContactPersonData { get; set; } = new ContactPersonModel();
         public OrderModel OrderData { get; set; } = new OrderModel() { CremationDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) };
         private ObservableCollection<TimePeriod> _freeTime = [];
-        public TimeOnly CremationTime { get; set; } = new TimeOnly();
+        public TimeOnly CremationTime { get; set; } = new TimeOnly( hour: 12, minute: 00);
         public ObservableCollection<TimePeriod> FreeTime
         {
             get => _freeTime;
@@ -93,6 +91,7 @@ namespace Crematory.ViewModels.CreateOrder
             }
         }
 
+        public decimal GetServicePrice() => ServiceData.Where(s => s.IsSelected).Sum(s => s.Price);
         public async Task LoadServicesAsync()
         {
             ServiceData.Clear();
@@ -118,97 +117,98 @@ namespace Crematory.ViewModels.CreateOrder
             if (!IsInputsValid())
                 return;
 
-            using var transaction = await _orderRepository.BeginTransactionAsync(); 
-
             try
             {
-
-                var freeTime = await GetFreeTime();
-                if (freeTime.Count <= 0)
-                    return;
-                
-                var temp = OrderData.CremationDateTime;
-                OrderData.CremationDateTime = new DateTime(
-                    temp.Year,
-                    temp.Month,
-                    temp.Day,
-                    CremationTime.Hour,
-                    CremationTime.Minute,
-                    CremationTime.Second
-                );
-
-
-                var StartTime = TimeOnly.FromDateTime(OrderData.CremationDateTime);
-                var EndTime = TimeOnly.FromDateTime(OrderData.CremationDateTime.Add(OrderData.CremationDuration));
-
-                bool isWithinFreeTime = false;
-
-                foreach (var timeSlot in freeTime)
-                {
-                    if (StartTime >= timeSlot.StartAsTimeOnly() &&
-                        EndTime <= timeSlot.EndAsTimeOnly())
-                    {
-                        isWithinFreeTime = true;
-                        break;
-                    }
-                }
-
-                if (!isWithinFreeTime)
-                {
-                    MessageBox.Show("Час кремації має бути в межах доступного часу!");
-                    return;
-                }
-
-               
-                var deceasedId = await _deceasedRepository.GetDeceasedIdAsync(DeceasedData);
-
-                if (deceasedId <= 0)
-                {
-                    var res = await _deceasedRepository.InsertDeceasedAsync(DeceasedData);
-                    deceasedId = await _deceasedRepository.GetDeceasedIdAsync(DeceasedData);
-
-                    if (!res || deceasedId < 0)
-                    {
-                        MessageBox.Show("Виникла помилка під час додавання даних про померлого!");
-                        return;
-                    }
-                }
-
-                var contactPersonId = await _contactPersonRepository.GetContactPersonIdAsync(ContactPersonData);
-
-                if (contactPersonId <= 0)
-                {
-                    var res = await _contactPersonRepository.InsertContactPersonAsync(ContactPersonData);
-                    contactPersonId = await _contactPersonRepository.GetContactPersonIdAsync(ContactPersonData);
-
-                    if (!res || contactPersonId < 0)
-                    {
-                        MessageBox.Show("Виникла помилка під час додавання даних про контактну особу!");
-                        return;
-                    }
-                }
-               
-
                 if (status == EditingPagesStatus.AddNewNote)
                 {
+                    var freeTime = await GetFreeTime();
+                    if (freeTime.Count <= 0)
+                        return;
+
+                    var temp = OrderData.CremationDateTime;
+                    OrderData.CremationDateTime = new DateTime(
+                        temp.Year,
+                        temp.Month,
+                        temp.Day,
+                        CremationTime.Hour,
+                        CremationTime.Minute,
+                        CremationTime.Second
+                    );
+
+
+                    var StartTime = TimeOnly.FromDateTime(OrderData.CremationDateTime);
+                    var EndTime = TimeOnly.FromDateTime(OrderData.CremationDateTime.Add(OrderData.CremationDuration));
+
+                    bool isWithinFreeTime = false;
+
+                    foreach (var timeSlot in freeTime)
+                    {
+                        if (StartTime >= timeSlot.StartAsTimeOnly() &&
+                            EndTime <= timeSlot.EndAsTimeOnly())
+                        {
+                            isWithinFreeTime = true;
+                            break;
+                        }
+                    }
+
+                    if (!isWithinFreeTime)
+                    {
+                        MessageBox.Show("Час кремації має бути в межах доступного часу!");
+                        return;
+                    }
+
+
+                    var deceasedId = await _deceasedRepository.GetDeceasedIdAsync(DeceasedData);
+
+                    if (deceasedId <= 0)
+                    {
+                        var decRes = await _deceasedRepository.InsertDeceasedAsync(DeceasedData);
+                        deceasedId = await _deceasedRepository.GetDeceasedIdAsync(DeceasedData);
+
+                        if (!decRes || deceasedId < 0)
+                        {
+                            MessageBox.Show("Виникла помилка під час додавання даних про померлого!");
+                            return;
+                        }
+                    }
+
+                    var contactPersonId = await _contactPersonRepository.GetContactPersonIdAsync(ContactPersonData);
+
+                    if (contactPersonId <= 0)
+                    {
+                        var conRes = await _contactPersonRepository.InsertContactPersonAsync(ContactPersonData);
+                        contactPersonId = await _contactPersonRepository.GetContactPersonIdAsync(ContactPersonData);
+
+                        if (!conRes || contactPersonId < 0)
+                        {
+                            MessageBox.Show("Виникла помилка під час додавання даних про контактну особу!");
+                            return;
+                        }
+                    }
                     OrderData.OrderDate = DateOnly.FromDateTime(DateTime.Now);
                     OrderData.ContactPersonId = contactPersonId;
                     OrderData.DeceasedId = deceasedId;
                     OrderData.CrematoryId = SelectedCrematory.Id;
 
-                    var res = await _orderRepository.InsertOrderAsync(OrderData);
+                    var orderId = await _orderRepository.InsertOrderAsync(OrderData);
 
-                    if (!res)
+                    List<ServiceModel> selectedServices = ServiceData.Where(s => s.IsSelected).ToList();
+                    
+                    
+                    
+                    if (orderId <= 0)
                     {
                         MessageBox.Show("Виникла помилка під час додавання даних про замовлення!");
-                        transaction.Rollback();
 
                         return;
                     }
                     else
                     {
                         MessageBox.Show("Операція пройла успішно!");
-                        transaction.Commit();
+                        
+                        if (selectedServices != null && selectedServices.Count > 0)
+                            await _serviceRepository.AddSelectedServices(selectedServices, orderId);
+
                         return;
                     }
                 }
@@ -219,7 +219,6 @@ namespace Crematory.ViewModels.CreateOrder
             }
             catch (Exception ex)
             {
-                transaction.Rollback();
                 MessageBox.Show($"Помилка {ex.Message}");
             }
         }
@@ -254,6 +253,15 @@ namespace Crematory.ViewModels.CreateOrder
             }
 
             return await _scheduleRepository.GetFreeTimeAsync(crematoryId, DateOnly.FromDateTime(OrderData.CremationDateTime));
+        }
+        public void ChangeCheckboxState(object sender, bool state)
+        {
+            var checkBox = sender as CheckBox;
+            var context = checkBox?.DataContext as ServiceModel;
+            if (context == null)
+                return;
+
+            context.IsSelected = state;
         }
         private bool IsInputsValid()
         {

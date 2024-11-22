@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crematory.Models
+namespace Crematory.Models.DatabaseModels
 {
     public class CrematoryScheduleModel
     {
@@ -16,7 +16,7 @@ namespace Crematory.Models
         public TimeSpan OpenTime
         {
             get => _openTime;
-            set => _openTime = new TimeSpan(value.Hours, value.Minutes, 0); 
+            set => _openTime = new TimeSpan(value.Hours, value.Minutes, 0);
         }
         public TimeSpan CloseTime
         {
