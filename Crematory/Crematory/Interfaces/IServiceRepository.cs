@@ -1,4 +1,4 @@
-﻿using Crematory.Models;
+﻿using Crematory.Models.DatabaseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +13,7 @@ namespace Crematory.Interfaces
         Task<bool> InsertServiceAsync(ServiceModel service);
         Task<bool> UpdateServiceAsync(ServiceModel service);
         Task<List<ServiceModel>> GetAllServicesAsync();
+        Task<bool> AddSelectedServices(List<ServiceModel> services, int orderId);
+        Task<List<ServiceModel>> GetServicesForOrderAsync(int orderId);
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Crematory.Interfaces;
-using Crematory.Models;
 using System.Configuration;
 using Npgsql;
 using Crematory.DatabaseManager;
 using System.Data.Common;
+using Crematory.Models.DatabaseModels;
 
 namespace Crematory.DataAccess
 {
@@ -67,6 +67,16 @@ namespace Crematory.DataAccess
             else
                 return res;
             
+        }
+        public async Task<DeceasedModel> GetDeceasedById(int id)
+        {
+            var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
+            var command = new NpgsqlCommand(SqlQueries.GetDeceasedById);
+            command.Parameters.AddWithValue("@Id", id);
+
+            var deceaseds = await db.FetchRecordsAsync<DeceasedModel>(command);
+
+            return deceaseds.FirstOrDefault() ?? new DeceasedModel();
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Crematory.Interfaces;
-using Crematory.Models;
 using Crematory.DataAccess;
 using Crematory.ViewModels.AdminWindow;
 using System.Windows;
 using Crematory.enums;
+using Crematory.Models.DatabaseModels;
 
 namespace Crematory.Views.AdminWindow
 {
@@ -45,8 +45,16 @@ namespace Crematory.Views.AdminWindow
             if (result == MessageBoxResult.No)
                 return;
 
-            var operationResult = await _viewModel.DeleteCrematory(_currentCrematory);
-            MessageBox.Show(operationResult ? "Операція пройшла успішно" : "Виникла помилка при виконанні операції");
+            try
+            {
+                var operationResult = await _viewModel.DeleteCrematory(_currentCrematory);
+                MessageBox.Show(operationResult ? "Операція пройшла успішно" : "Виникла помилка при виконанні операції");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Сталася помилка видалення! Переконайтесь, що наразі не існує замовлень з цим крематорієм!");
+                throw;
+            }
 
             Back();
         }

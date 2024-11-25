@@ -1,10 +1,5 @@
 ﻿using Crematory.Interfaces;
-using Crematory.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Crematory.Models.DatabaseModels;
 
 namespace Crematory.ViewModels.AdminWindow
 {
@@ -23,8 +18,15 @@ namespace Crematory.ViewModels.AdminWindow
         }
         public async Task<bool> DeleteCrematory(CrematoryModel Item)
         {
-            var res = await _repository.DeleteCrematoryAsync(Item.Id);
-            return res;
+            try
+            {
+                var res = await _repository.DeleteCrematoryAsync(Item.Id);
+                return res;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public async Task<bool> UpdateCrematory(CrematoryModel updatedItem)
         {

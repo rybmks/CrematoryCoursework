@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crematory.Models
+namespace Crematory.Models.AppModels
 {
-    public class TimePeriod 
+    public class TimePeriod
     {
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }

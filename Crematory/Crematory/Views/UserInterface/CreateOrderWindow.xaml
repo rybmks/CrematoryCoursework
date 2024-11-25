@@ -164,7 +164,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="Час:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding CremationTime, StringFormat=hh\\:mm}" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding CremationTime, StringFormat=HH\\:mm}" />
 
                 <Label Content="Орієнтовна тривалісь:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding OrderData.CremationDuration, StringFormat=hh\\:mm}" />
@@ -178,7 +178,7 @@
                 Grid.Row="1"
                 Grid.Column="3" 
                 Grid.ColumnSpan="2" 
-                Grid.RowSpan="4"
+                Grid.RowSpan="3"
                 IsReadOnly="True"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding ServiceData}">
@@ -189,15 +189,14 @@
                     <DataGridTemplateColumn Header="Обрати">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox>
-
-                                </CheckBox>
-                            </DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsSelected}" Checked="CheckBox_Checked" Unchecked="Checkbox_Unchecked"/>
+                                </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Grid.Row="9" Grid.Column="1" Content="Додати" FontSize="20" Click="SubmitButton_Click" Grid.ColumnSpan="3" Margin="194,14,196,15"/>
+                <Button Grid.ColumnSpan="1" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="4" Content="Дізнатись ціну послуг" Click="GetServicesPrice" />
+                <Button Grid.Row="9" Grid.Column="1" Content="Додати" FontSize="20" Click="SubmitButton_Click" Grid.ColumnSpan="3" Margin="194,14,196,15"/>
             <Button Grid.Row="9" Grid.Column="4" Content="Назад" FontSize="20" Click="BackToMain" Margin="0,14,10,15"/>
         </Grid>
     </Grid>

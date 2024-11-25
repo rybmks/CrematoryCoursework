@@ -1,9 +1,9 @@
 ﻿using Crematory.Interfaces;
-using Crematory.DataAccess;
-using Crematory.Models;
 using Npgsql;
 using System.Configuration;
 using Crematory.DatabaseManager;
+using Crematory.Models.DatabaseModels;
+using Crematory.Models.AppModels;
 
 
 namespace Crematory.DataAccess
@@ -125,34 +125,30 @@ namespace Crematory.DataAccess
             
             var commandSchedule = new NpgsqlCommand(SqlQueries.GetCrematoryScheduleForDay);
             commandSchedule.Parameters.AddWithValue("@CrematoryId", crematoryId);
-            commandSchedule.Parameters.AddWithValue("@DayOfWeek", dayOfWeek); // Enum передаётся как строка
+            commandSchedule.Parameters.AddWithValue("@DayOfWeek", dayOfWeek); 
             var schedule = await db.FetchRecordsAsync<TimePeriod>(commandSchedule);
 
             if (schedule == null || !schedule.Any())
-                throw new Exception("Schedule not found for the specified day and crematory.");
+                return new List<TimePeriod>();
 
             var dailySchedule = schedule.First();
 
-            // Создаём список всех событий: начало и конец расписания + заказы
             var allPeriods = new List<TimePeriod>
             {
-                new() { StartTime = dailySchedule.StartTime, EndTime = dailySchedule.StartTime } // Начало расписания
+                new() { StartTime = dailySchedule.StartTime, EndTime = dailySchedule.StartTime } 
             };
             
-            allPeriods.AddRange(orders); // Добавляем заказы
-            allPeriods.Add(new TimePeriod { StartTime = dailySchedule.EndTime, EndTime = dailySchedule.EndTime }); // Конец расписания
+            allPeriods.AddRange(orders);
+            allPeriods.Add(new TimePeriod { StartTime = dailySchedule.EndTime, EndTime = dailySchedule.EndTime }); 
 
-            // Сортируем по времени начала
             allPeriods = [.. allPeriods.OrderBy(p => p.StartTime)];
 
-            // Ищем окна
             var gaps = new List<TimePeriod>();
             for (int i = 0; i < allPeriods.Count - 1; i++)
             {
                 var current = allPeriods[i];
                 var next = allPeriods[i + 1];
 
-                // Проверяем, есть ли разрыв между текущим событием и следующим
                 if (current.EndTime < next.StartTime)
                 {
                     gaps.Add(new TimePeriod
@@ -163,7 +159,7 @@ namespace Crematory.DataAccess
                 }
             }
 
-            return gaps; // Возвращаем все найденные промежутки
+            return gaps; 
         }
     }
 }

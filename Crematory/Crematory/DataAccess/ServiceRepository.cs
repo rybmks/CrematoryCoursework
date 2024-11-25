@@ -1,7 +1,8 @@
 ﻿using System.Configuration;
+using System.Data.Common;
 using Crematory.DatabaseManager;
 using Crematory.Interfaces;
-using Crematory.Models;
+using Crematory.Models.DatabaseModels;
 using Npgsql;
 
 namespace Crematory.DataAccess
@@ -73,6 +74,36 @@ namespace Crematory.DataAccess
             }
 
             return true;
+        }
+        public async Task<bool> AddSelectedServices(List<ServiceModel> services, int orderId)
+        {
+            PgDatabaseManager db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
+            List<DbCommand> commands = new();
+            
+            foreach (var s in services)
+            {
+                var command = new NpgsqlCommand(SqlQueries.InsertServiceUsage);
+                command.Parameters.AddWithValue("@OrderId", orderId);
+                command.Parameters.AddWithValue("@ServiceId", s.Id);
+                commands.Add(command);
+            }
+
+            var res = await db.ExecuteCommandAsync(commands);
+
+            if (res != null)
+                return true;
+
+            return false;
+        }
+        public async Task<List<ServiceModel>> GetServicesForOrderAsync(int orderId)
+        {
+            var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
+            var command = new NpgsqlCommand(SqlQueries.GetServicesForOrder);
+            command.Parameters.AddWithValue("orderId", orderId);
+
+            var services = await db.FetchRecordsAsync<ServiceModel>(command);
+
+            return (List<ServiceModel>)services;
         }
     }
 }

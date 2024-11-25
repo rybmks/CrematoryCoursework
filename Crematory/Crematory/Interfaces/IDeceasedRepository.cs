@@ -1,4 +1,4 @@
-﻿using Crematory.Models;
+﻿using Crematory.Models.DatabaseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +12,6 @@ namespace Crematory.Interfaces
         Task<bool> InsertDeceasedAsync(DeceasedModel deceased);
         Task<bool> DeleteDeceasedAsync(int id);
         Task<int> GetDeceasedIdAsync(DeceasedModel deceased);
+        Task<DeceasedModel> GetDeceasedById(int id);
     }
 }

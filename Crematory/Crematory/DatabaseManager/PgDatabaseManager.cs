@@ -30,11 +30,10 @@ namespace Crematory.DatabaseManager
                 }
                 await transaction.CommitAsync();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 await transaction.RollbackAsync();
-
-                throw new InvalidOperationException($"Помилка: {e.Message}.", e);
+                throw;
             }
 
             return rowsAffected;

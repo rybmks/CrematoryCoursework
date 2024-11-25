@@ -20,7 +20,7 @@
                             HorizontalAlignment="Left" 
                             HorizontalContentAlignment="Center" 
                             VerticalContentAlignment="Center" 
-                            Margin="0, 0,0,0"/>
+                            Margin="0, 0,0,0" Click="CheckNotes_Click"/>
 
                     <Button Content="Створити запис" 
                             Width="150" Height="50" 

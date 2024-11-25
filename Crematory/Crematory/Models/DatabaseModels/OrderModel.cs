@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crematory.Models
+namespace Crematory.Models.DatabaseModels
 {
     public class OrderModel
     {

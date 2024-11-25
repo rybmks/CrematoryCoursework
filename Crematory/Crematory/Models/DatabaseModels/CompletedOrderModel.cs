@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crematory.Models
+namespace Crematory.Models.DatabaseModels
 {
-    public class CustomerServerUsageModel
+    public class CompletedOrderModel
     {
         public int Id { get; set; }
         public int OrderId { get; set; }
-        public int ServiceId { get; set; }
+        public string? CompetionReason { get; set; }
     }
 }
