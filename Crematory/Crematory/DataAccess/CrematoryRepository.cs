@@ -33,19 +33,20 @@ namespace Crematory.DataAccess
         }
         public async Task<bool> DeleteCrematoryAsync(int id)
         {
-            var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
-            var command = new NpgsqlCommand(SqlQueries.DeleteCrematory);
+            
+                var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
+                var command = new NpgsqlCommand(SqlQueries.DeleteCrematory);
 
-            command.Parameters.AddWithValue("@Id", id);
+                command.Parameters.AddWithValue("@Id", id);
 
-            var res = await db.ExecuteCommandAsync(new List<NpgsqlCommand> { command });
+                var res = await db.ExecuteCommandAsync(new List<NpgsqlCommand> { command });
 
-            if (!res.Any() || res.First() == 0)
-            {
-                return false;
-            }
+                if (!res.Any() || res.First() == 0)
+                {
+                    return false;
+                }
 
-            return true;
+                return true;
         }
         public async Task<bool> UpdateCrematoryAsync(CrematoryModel crematory)
         {

@@ -68,5 +68,15 @@ namespace Crematory.DataAccess
                 return res;
             
         }
+        public async Task<DeceasedModel> GetDeceasedById(int id)
+        {
+            var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
+            var command = new NpgsqlCommand(SqlQueries.GetDeceasedById);
+            command.Parameters.AddWithValue("@Id", id);
+
+            var deceaseds = await db.FetchRecordsAsync<DeceasedModel>(command);
+
+            return deceaseds.FirstOrDefault() ?? new DeceasedModel();
+        }
     }
 }

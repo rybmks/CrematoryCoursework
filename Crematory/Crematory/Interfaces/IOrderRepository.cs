@@ -1,4 +1,5 @@
-﻿using Crematory.Models.DatabaseModels;
+﻿using Crematory.Models.AppModels;
+using Crematory.Models.DatabaseModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,5 +16,9 @@ namespace Crematory.Interfaces
         Task<bool> UpdateOrderAsync(OrderModel order);
         Task<List<OrderModel>> GetAllOrdersAsync();
         Task<IDbTransaction> BeginTransactionAsync();
+        Task<List<FullOrderInfoModel>> GetAllPlannedOrdersAsync();
+        Task<int> InsertCompletedOrder(CompletedOrderModel order);
+        Task<List<FullOrderInfoModel>> GetCompletedOrdersAsync();
+        Task<bool> DeleteCompletedAsync(int orderId);
     }
 }

@@ -1,4 +1,8 @@
-﻿using Crematory.ViewModels.CreatedOrders;
+﻿using Crematory.DataAccess;
+using Crematory.Models;
+using Crematory.Models.AppModels;
+using Crematory.Models.DatabaseModels;
+using Crematory.ViewModels.CreatedOrders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +25,15 @@ namespace Crematory.Views.UserInterface
     public partial class CreatedOrders : Window
     {
         private readonly CreatedOrdersViewModel _viewModel;
+
         public CreatedOrders()
         {
             InitializeComponent();
-            _viewModel = new();
+            _viewModel = new(
+                new OrderRepository(),
+                new DeceasedRepository(), 
+                new ContactPersonRepository(),
+                new ServiceRepository());
             DataContext = _viewModel;
         }
 
@@ -33,6 +42,74 @@ namespace Crematory.Views.UserInterface
             var m = new MainWindow();
             m.Show();
             this.Hide();
+        }
+        public void Page_VisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                UpdateForm();
+            }
+        }
+        private void UpdateForm()
+        {
+            _viewModel.LoadPlannedOrdersAsync();
+            _viewModel.LoadCompletedOrdersAsync();
+        }
+
+        private void CompleteOrder_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.DataContext is FullOrderInfoModel fullOrderInfo)
+            {
+                var submitWindow = new SubmitOrderCompleting(_viewModel, fullOrderInfo.OrderId, this);
+                submitWindow.Show();
+                this.Hide();
+            }
+        }
+
+        private void DeleteCompleted_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult res = MessageBox.Show(
+                "Ви впевнені, що хочете видалити запис?",
+                "Видалення",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning
+                );
+
+            if (res == MessageBoxResult.No)
+                return;
+
+            if (sender is Button button && button.DataContext is FullOrderInfoModel fullOrderInfo)
+            {
+                _viewModel.DeleteCompleted(fullOrderInfo.OrderId);
+            }
+        }
+
+        private void DeleteOrder_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult res = MessageBox.Show(
+               "Ви впевнені, що хочете видалити запис?",
+               "Видалення",
+               MessageBoxButton.YesNo,
+               MessageBoxImage.Warning
+               );
+
+            if (res == MessageBoxResult.No)
+                return;
+
+            if (sender is Button button && button.DataContext is FullOrderInfoModel fullOrderInfo)
+            {
+                _viewModel.DeleteOrder(fullOrderInfo.OrderId);
+            }
+        }
+
+        private void GetFullInfo_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.DataContext is FullOrderInfoModel fullOrderInfo)
+            {
+                var infoWindow = new MoreInfoWindow(_viewModel, fullOrderInfo);
+                infoWindow.Owner = this;
+                infoWindow.ShowDialog();
+            }
         }
     }
 }

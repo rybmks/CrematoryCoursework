@@ -1,6 +1,7 @@
 ﻿using Crematory.enums;
 using Crematory.Interfaces;
-using Crematory.Models;
+using Crematory.Models.AppModels;
+using Crematory.Models.DatabaseModels;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
@@ -25,24 +26,24 @@ namespace Crematory.ViewModels.CreateOrder
         public event PropertyChangedEventHandler? PropertyChanged;
         public DateTime? DeathDateForPicker
         {
-            get => DeceasedData.DeathDate.ToDateTime(TimeOnly.MinValue);
+            get => DeceasedData.DeathDate;
             set
             {
                 if (value.HasValue)
                 {
-                    DeceasedData.DeathDate = DateOnly.FromDateTime(value.Value);
+                    DeceasedData.DeathDate = value.Value;
                     OnPropertyChanged(nameof(DeathDateForPicker));
                 }
             }
         }
         public DateTime? BirthDateForPicker
         {
-            get => DeceasedData.BirthDate.ToDateTime(TimeOnly.MinValue);
+            get => DeceasedData.BirthDate;
             set
             {
                 if (value.HasValue)
                 {
-                    DeceasedData.BirthDate = DateOnly.FromDateTime(value.Value);
+                    DeceasedData.BirthDate = value.Value;
                     OnPropertyChanged(nameof(BirthDateForPicker));
                 }
             }
@@ -71,8 +72,8 @@ namespace Crematory.ViewModels.CreateOrder
         public ObservableCollection<CrematoryModel> CrematoryData { get; set; } = [];
         public DeceasedModel DeceasedData { get; set; } = new DeceasedModel()
         {
-            BirthDate = DateOnly.FromDateTime(DateTime.Today),
-            DeathDate = DateOnly.FromDateTime(DateTime.Today)
+            BirthDate = DateTime.Today,
+            DeathDate =DateTime.Today
         };
         public ContactPersonModel ContactPersonData { get; set; } = new ContactPersonModel();
         public OrderModel OrderData { get; set; } = new OrderModel() { CremationDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) };
@@ -90,7 +91,6 @@ namespace Crematory.ViewModels.CreateOrder
                 }
             }
         }
-
         public decimal GetServicePrice() => ServiceData.Where(s => s.IsSelected).Sum(s => s.Price);
         public async Task LoadServicesAsync()
         {
@@ -112,10 +112,10 @@ namespace Crematory.ViewModels.CreateOrder
                 CrematoryData.Add(item);
             }
         }
-        public async Task CreateOrderNote()
+        public async Task<bool> CreateOrderNote()
         {
             if (!IsInputsValid())
-                return;
+                return false;
 
             try
             {
@@ -123,7 +123,10 @@ namespace Crematory.ViewModels.CreateOrder
                 {
                     var freeTime = await GetFreeTime();
                     if (freeTime.Count <= 0)
-                        return;
+                    {
+                        MessageBox.Show("На цю дату вільного часу немає!");
+                        return false;
+                    }
 
                     var temp = OrderData.CremationDateTime;
                     OrderData.CremationDateTime = new DateTime(
@@ -135,6 +138,11 @@ namespace Crematory.ViewModels.CreateOrder
                         CremationTime.Second
                     );
 
+                    if (OrderData.CremationDateTime <= DateTime.Now)
+                    {
+                        MessageBox.Show("Дата кремації не може бути раніше ніж сьогодні");
+                        return false;
+                    }
 
                     var StartTime = TimeOnly.FromDateTime(OrderData.CremationDateTime);
                     var EndTime = TimeOnly.FromDateTime(OrderData.CremationDateTime.Add(OrderData.CremationDuration));
@@ -154,7 +162,7 @@ namespace Crematory.ViewModels.CreateOrder
                     if (!isWithinFreeTime)
                     {
                         MessageBox.Show("Час кремації має бути в межах доступного часу!");
-                        return;
+                        return false;
                     }
 
 
@@ -168,7 +176,7 @@ namespace Crematory.ViewModels.CreateOrder
                         if (!decRes || deceasedId < 0)
                         {
                             MessageBox.Show("Виникла помилка під час додавання даних про померлого!");
-                            return;
+                            return false;
                         }
                     }
 
@@ -182,7 +190,7 @@ namespace Crematory.ViewModels.CreateOrder
                         if (!conRes || contactPersonId < 0)
                         {
                             MessageBox.Show("Виникла помилка під час додавання даних про контактну особу!");
-                            return;
+                            return false;
                         }
                     }
                     OrderData.OrderDate = DateOnly.FromDateTime(DateTime.Now);
@@ -200,7 +208,7 @@ namespace Crematory.ViewModels.CreateOrder
                     {
                         MessageBox.Show("Виникла помилка під час додавання даних про замовлення!");
 
-                        return;
+                        return false;
                     }
                     else
                     {
@@ -209,18 +217,17 @@ namespace Crematory.ViewModels.CreateOrder
                         if (selectedServices != null && selectedServices.Count > 0)
                             await _serviceRepository.AddSelectedServices(selectedServices, orderId);
 
-                        return;
+                        return true;
                     }
-                }
-                else
-                {
-
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Помилка {ex.Message}");
+                return false;
             }
+
+            return false;
         }
         public async Task LoadFreeTimeAsync()
         {
@@ -229,7 +236,10 @@ namespace Crematory.ViewModels.CreateOrder
             var freeTime = await GetFreeTime();
 
             if (freeTime.Count <= 0)
+            {
+                MessageBox.Show("На цю дату вільного часу немає!");
                 return;
+            }
 
             foreach (var t in freeTime)
             {
@@ -251,6 +261,7 @@ namespace Crematory.ViewModels.CreateOrder
                 MessageBox.Show("Оберіть крематорій!");
                 return [];
             }
+
 
             return await _scheduleRepository.GetFreeTimeAsync(crematoryId, DateOnly.FromDateTime(OrderData.CremationDateTime));
         }
@@ -275,7 +286,7 @@ namespace Crematory.ViewModels.CreateOrder
                 MessageBox.Show("Введіть ім'я контактної особи!");
                 return false;
             }
-            if (!IsDateOnlyValid(DeceasedData.BirthDate) || !IsDateOnlyValid(DeceasedData.DeathDate))
+            if (!IsDateTimeValid(DeceasedData.BirthDate) || !IsDateTimeValid(DeceasedData.DeathDate))
             {
                 MessageBox.Show("Неправильний формат дати! (Дані про померлого)");
                 return false;
@@ -291,7 +302,7 @@ namespace Crematory.ViewModels.CreateOrder
                 MessageBox.Show("Введіть адресу контактної особи!");
                 return false;
             }
-            if (DeceasedData.Gender < 0)
+            if (string.IsNullOrWhiteSpace(DeceasedData.Gender))
             {
                 MessageBox.Show("Оберіть стать померлого!");
                 return false;
@@ -307,6 +318,7 @@ namespace Crematory.ViewModels.CreateOrder
                 MessageBox.Show("Неправильньна дата або час початку!");
                 return false;
             }
+
             if (OrderData.CremationDuration.Hours <= 0)
             {
                 MessageBox.Show("Неправильньно вказана тривалість!");
@@ -323,15 +335,6 @@ namespace Crematory.ViewModels.CreateOrder
             bool IsDateTimeValid(DateTime dateTime)
             {
                 if (dateTime.Year == 0 || dateTime.Month == 0 || dateTime.Day == 0)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-            bool IsDateOnlyValid(DateOnly date)
-            {
-                if (date.Year == 1 || date.Month == 0 || date.Day == 0)
                 {
                     return false;
                 }

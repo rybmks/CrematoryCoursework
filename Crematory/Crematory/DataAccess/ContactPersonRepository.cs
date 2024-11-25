@@ -68,5 +68,15 @@ namespace Crematory.DataAccess
 
             return false;
         }
+        public async Task<ContactPersonModel> GetContactPersonById(int id)
+        {
+            var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
+            var command = new NpgsqlCommand(SqlQueries.GetContactPersonById);
+            command.Parameters.AddWithValue("@Id", id);
+
+            var contactPerson = await db.FetchRecordsAsync<ContactPersonModel>(command);
+
+            return contactPerson.FirstOrDefault() ?? new ContactPersonModel();
+        }
     }
 }

@@ -95,5 +95,15 @@ namespace Crematory.DataAccess
 
             return false;
         }
+        public async Task<List<ServiceModel>> GetServicesForOrderAsync(int orderId)
+        {
+            var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
+            var command = new NpgsqlCommand(SqlQueries.GetServicesForOrder);
+            command.Parameters.AddWithValue("orderId", orderId);
+
+            var services = await db.FetchRecordsAsync<ServiceModel>(command);
+
+            return (List<ServiceModel>)services;
+        }
     }
 }

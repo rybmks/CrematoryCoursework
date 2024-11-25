@@ -8,20 +8,82 @@
         Title="CreatedOrders" Height="450" Width="800"
         IsVisibleChanged="Page_VisibleChanged">
     <Grid Background="#FFD580">
-        <TabControl Margin="10">
-            <TabItem Header="Заплановані">
-                <Grid>
-                    <DataGrid>
-                        
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TabControl Margin="10" Grid.Row="0">
+                <TabItem Header="Заплановані">
+                    <DataGrid 
+                        ItemsSource="{Binding PlannedOrders}"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        AlternationCount="1000">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Дата замовлення" Binding="{Binding OrderDate, StringFormat=yyyy.MM.dd}"/>
+                        <DataGridTextColumn Header="Дата кремації" Binding="{Binding CremationDateTime, StringFormat=yyyy.MM.dd hh:mm}"/>
+                        <DataGridTextColumn Header="Тривалість" Binding="{Binding CremationDuration}"/>
+                        <DataGridTextColumn Header="Померлий" Binding="{Binding DeceasedName}"/>
+                        <DataGridTextColumn Header="Контактна особа" Binding="{Binding ContactPersonName}"/>
+                        <DataGridTextColumn Header="Крематорій" Binding="{Binding CrematoryName}"/>
+                        <DataGridTextColumn Header="Заг. вартість" Binding="{Binding TotalPrice}"/>
+                        <DataGridTemplateColumn Header="Завершити">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Завершити" Click="CompleteOrder_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Видалити">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Видалити" Click="DeleteOrder_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Інформація">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Повна інформація" Click="GetFullInfo_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
                     </DataGrid>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Виконані">
-                <DataGrid>
-                    
+                </TabItem>
+                <TabItem Header="Виконані">
+                    <DataGrid 
+                        ItemsSource="{Binding CompletedOrders}"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        AlternationCount="1000">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Дата замовлення" Binding="{Binding OrderDate, StringFormat=yyyy.MM.dd}"/>
+                        <DataGridTextColumn Header="Статус виконання" Binding="{Binding CompletionReason}"/>
+                        <DataGridTextColumn Header="Дата кремації" Binding="{Binding CremationDateTime, StringFormat=yyyy.MM.dd hh:mm}"/>
+                        <DataGridTextColumn Header="Тривалість" Binding="{Binding CremationDuration}"/>
+                        <DataGridTextColumn Header="Померлий" Binding="{Binding DeceasedName}"/>
+                        <DataGridTextColumn Header="Контактна особа" Binding="{Binding ContactPersonName}"/>
+                        <DataGridTextColumn Header="Крематорій" Binding="{Binding CrematoryName}"/>
+                        <DataGridTextColumn Header="Заг. вартість" Binding="{Binding TotalPrice}"/>
+                        <DataGridTemplateColumn Header="Інформація">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Повна інформація" Click="GetFullInfo_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Видалити">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Видалити" Click="DeleteCompleted_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-        </TabControl>
-        <Button Content="Назад" FontSize="20" Click="BackToMain" Margin="10,201,10,-176" MaxWidth="150" RenderTransformOrigin="0.533,0.675"/>
+            </TabControl>
+            <Button Grid.Row="1" Content="Назад" FontSize="20" Click="BackToMain" Margin="10" VerticalAlignment="Bottom" MaxWidth="150"/>
     </Grid>
 </Window>

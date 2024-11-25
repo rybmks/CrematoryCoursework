@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace Crematory.Models
+namespace Crematory.Models.DatabaseModels
 {
-    public class ServiceModel 
+    public class ServiceModel
     {
 
         public int Id { get; set; }

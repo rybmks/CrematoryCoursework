@@ -1,5 +1,4 @@
-﻿using Crematory.Models;
-using Crematory.Interfaces;
+﻿using Crematory.Interfaces;
 using System.Collections.ObjectModel;
 using Crematory.Models.DatabaseModels;
 

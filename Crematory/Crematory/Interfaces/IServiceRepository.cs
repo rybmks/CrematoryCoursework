@@ -14,5 +14,6 @@ namespace Crematory.Interfaces
         Task<bool> UpdateServiceAsync(ServiceModel service);
         Task<List<ServiceModel>> GetAllServicesAsync();
         Task<bool> AddSelectedServices(List<ServiceModel> services, int orderId);
+        Task<List<ServiceModel>> GetServicesForOrderAsync(int orderId);
     }
 }

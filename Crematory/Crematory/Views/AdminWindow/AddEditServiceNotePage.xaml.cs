@@ -1,9 +1,9 @@
 ﻿using Crematory.Interfaces;
-using Crematory.Models;
 using Crematory.DataAccess;
 using Crematory.ViewModels.AdminWindow;
 using Crematory.enums;
 using System.Windows;
+using Crematory.Models.DatabaseModels;
 
 namespace Crematory.Views.AdminWindow
 {

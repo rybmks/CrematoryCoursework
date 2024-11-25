@@ -164,7 +164,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="Час:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding CremationTime, StringFormat=hh\\:mm}" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding CremationTime, StringFormat=HH\\:mm}" />
 
                 <Label Content="Орієнтовна тривалісь:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding OrderData.CremationDuration, StringFormat=hh\\:mm}" />

@@ -19,8 +19,7 @@ namespace Crematory.Views.UserInterface
             _viewModel = new CreateOrderViewModel(
                 new ServiceRepository(), new CrematoryRepository(), 
                 new DeceasedRepository(), new ContactPersonRepository(),
-                new ScheduleRepository(),
-                new OrderRepository());
+                new ScheduleRepository(), new OrderRepository());
             
             DataContext = _viewModel;
         }
@@ -44,7 +43,14 @@ namespace Crematory.Views.UserInterface
         }
         private async void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            await _viewModel.CreateOrderNote();
+            var res = await _viewModel.CreateOrderNote();
+           
+            if (res)
+            {
+                var m = new MainWindow();
+                m.Show();
+                this.Hide();
+            }
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
