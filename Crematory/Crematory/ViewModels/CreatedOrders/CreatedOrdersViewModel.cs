@@ -60,14 +60,9 @@ namespace Crematory.ViewModels.CreatedOrders
         }
         public async Task<DeceasedModel> GetDeceasedByIdAsync(int id) => await _deceasedRepository.GetDeceasedById(id);
         public async Task<ContactPersonModel> GetContactPersonByIdAsync(int id) => await _contactPersonRepository.GetContactPersonById(id);
-        public async void CompleteOrder(CompletedOrderModel order)
+        public async void CompleteOrder(OrderModel order)
         {
-            await _orderRepository.InsertCompletedOrder(order);
-        }
-        public async void DeleteCompleted(int orderId)
-        {
-            await _orderRepository.DeleteCompletedAsync(orderId);
-            LoadCompletedOrdersAsync();
+            await _orderRepository.MarkOrderAsCompleted(order);
         }
         public async void DeleteOrder(int orderId)
         {

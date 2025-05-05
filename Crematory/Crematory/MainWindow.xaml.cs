@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Crematory.Views.AdminWindow;
 using Crematory.Views.UserInterface;
+using MaterialDesignThemes.Wpf;
 
 namespace Crematory
 {
@@ -41,6 +42,17 @@ namespace Crematory
             CreatedOrders createdOrders = new CreatedOrders();
             createdOrders.Show();
             this.Close();
+        }
+        
+        private void Statistics_Click(object sender, RoutedEventArgs e)
+        {
+            var statisticsWindow = new StatisticsWindow();
+            statisticsWindow.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Курсова робота студента другого курсу \nгрупи ІС-33\nРибалка Максима", "About", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

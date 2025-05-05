@@ -91,6 +91,7 @@ namespace Crematory.DataAccess
             var command = new NpgsqlCommand(SqlQueries.IsScheduleExistsToday);
 
             command.Parameters.AddWithValue("@DayOfWeek", schedule.DayOfWeek);
+            command.Parameters.AddWithValue("@CrematoryId", schedule.CrematoryId);
 
             var res = await db.FetchRecordsAsync<CrematoryScheduleModel>(command);
 

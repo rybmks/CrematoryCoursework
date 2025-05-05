@@ -16,5 +16,7 @@ namespace Crematory.Models.DatabaseModels
         public DateTime CremationDateTime { get; set; }
         public TimeSpan CremationDuration { get; set; }
         public decimal StandardPrice { get; set; }
+
+        public string? Status { get; set; } = "Pending";
     }
 }
