@@ -59,7 +59,7 @@
                         AlternationCount="1000">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Дата замовлення" Binding="{Binding OrderDate, StringFormat=yyyy.MM.dd}"/>
-                        <DataGridTextColumn Header="Статус виконання" Binding="{Binding CompletionReason}"/>
+                        <DataGridTextColumn Header="Статус виконання" Binding="{Binding Status}"/>
                         <DataGridTextColumn Header="Дата кремації" Binding="{Binding CremationDateTime, StringFormat=yyyy.MM.dd hh:mm}"/>
                         <DataGridTextColumn Header="Тривалість" Binding="{Binding CremationDuration}"/>
                         <DataGridTextColumn Header="Померлий" Binding="{Binding DeceasedName}"/>

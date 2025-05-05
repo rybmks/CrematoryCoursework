@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="727">
     <Grid Background="#FFD580">
-        <Border MinWidth="400" MaxWidth="600" Margin="15,0,15,0" Background="#FFFFFF" VerticalAlignment="Center" Padding="30, 30, 30, 20" CornerRadius="20" Height="246">
+        <Border MinWidth="400" MaxWidth="600" Margin="15,0,15,0" Background="#FFFFFF" VerticalAlignment="Center" Padding="30, 30, 30, 20" CornerRadius="20" Height="264">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="30" Color="Black" ShadowDepth="0" />
             </Border.Effect>
@@ -36,16 +36,21 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Button Content="Адмін-панель" 
-                            Width="183" Height="46" 
+                            Width="164" 
                             HorizontalAlignment="Left"
-                            Grid.ColumnSpan="2"
                             HorizontalContentAlignment="Center" 
                             VerticalContentAlignment="Center" 
                             Style="{StaticResource MaterialDesignOutlinedButton}" 
-                            Grid.Column="0" Click="ToAdminPanel" Cursor="Hand" Margin="139,-6,0,6" />
+                            Grid.Column="0" Click="ToAdminPanel" Cursor="Hand" Margin="0,14,0,5" Grid.ColumnSpan="2" />
+                    <Button Content="About" HorizontalAlignment="Left" Height="31" Margin="75,16,0,0" VerticalAlignment="Top" Width="78" Click="Button_Click" Grid.Column="2"/>
+                    <Button Content="Статистика"
+HorizontalContentAlignment="Center" 
+VerticalContentAlignment="Center" 
+Style="{StaticResource MaterialDesignOutlinedButton}" Click="Statistics_Click" Cursor="Hand" Grid.ColumnSpan="2" Margin="28,14,146,5" Grid.Column="1" />
                 </Grid>
             </StackPanel>
         </Border>

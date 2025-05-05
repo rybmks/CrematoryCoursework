@@ -60,9 +60,18 @@ namespace Crematory.Views.UserInterface
         {
             if (sender is Button button && button.DataContext is FullOrderInfoModel fullOrderInfo)
             {
-                var submitWindow = new SubmitOrderCompleting(_viewModel, fullOrderInfo.OrderId, this);
-                submitWindow.Show();
-                this.Hide();
+                MessageBoxResult result = MessageBox.Show(
+                        "Ви впевнені, що хочете відмітити замовлення як виконане? Надалі буде неможливо змінити статус замовлення!",
+                        "Завершення замовлення",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    OrderModel completedOrder = new() { Id = fullOrderInfo.OrderId };
+                    _viewModel.CompleteOrder(completedOrder);
+                    UpdateForm();
+                }
             }
         }
 
@@ -80,7 +89,7 @@ namespace Crematory.Views.UserInterface
 
             if (sender is Button button && button.DataContext is FullOrderInfoModel fullOrderInfo)
             {
-                _viewModel.DeleteCompleted(fullOrderInfo.OrderId);
+                _viewModel.DeleteOrder(fullOrderInfo.OrderId);
             }
         }
 

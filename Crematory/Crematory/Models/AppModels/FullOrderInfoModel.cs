@@ -19,6 +19,6 @@ namespace Crematory.Models.AppModels
         public int CrematoryId { get; set; }
         public string? CrematoryName { get; set; }
         public decimal TotalPrice { get; set; }
-        public string? CompletionReason { get; set; }
+        public string? Status { get; set; }
     }
 }

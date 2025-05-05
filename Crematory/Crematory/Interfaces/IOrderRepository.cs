@@ -17,8 +17,7 @@ namespace Crematory.Interfaces
         Task<List<OrderModel>> GetAllOrdersAsync();
         Task<IDbTransaction> BeginTransactionAsync();
         Task<List<FullOrderInfoModel>> GetAllPlannedOrdersAsync();
-        Task<int> InsertCompletedOrder(CompletedOrderModel order);
+        Task<int> MarkOrderAsCompleted(OrderModel order);
         Task<List<FullOrderInfoModel>> GetCompletedOrdersAsync();
-        Task<bool> DeleteCompletedAsync(int orderId);
     }
 }

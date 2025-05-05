@@ -29,7 +29,7 @@ namespace Crematory.DataAccess
         {
             var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
 
-            if (deceased == null || deceased.FullName == null)
+            if (deceased == null || deceased.FullName == null || deceased.Gender == null)
                 throw new NullReferenceException();
 
             var command = new NpgsqlCommand(SqlQueries.InsertDeceased);

@@ -56,6 +56,7 @@ namespace Crematory.DataAccess
             command.Parameters.AddWithValue("@ContactPersonId", order.ContactPersonId);
             command.Parameters.AddWithValue("@OrderDate", order.OrderDate);
             command.Parameters.AddWithValue("@CremationDateTime", order.CremationDateTime);
+            command.Parameters.AddWithValue("@Status", order.Status);
 
             var result = await db.FetchSingleIntAsync(command);
             
@@ -104,45 +105,19 @@ namespace Crematory.DataAccess
 
             return (List<FullOrderInfoModel>)orders;
         }
-        public async Task<int> InsertCompletedOrder(CompletedOrderModel order)
+        public async Task<int> MarkOrderAsCompleted(OrderModel order)
         {
             var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
-            var command = new NpgsqlCommand(SqlQueries.InsertCompletedOrder);
+            var command = new NpgsqlCommand(SqlQueries.MarkOrderAsCompleted);
 
             if (order == null)
                 return -1;
 
-            command.Parameters.AddWithValue("@OrderId", order.OrderId);
-            command.Parameters.AddWithValue("@CompletionReason", order.CompetionReason ?? "Виконано");
+            command.Parameters.AddWithValue("@OrderId", order.Id);
 
             var result = await db.FetchSingleIntAsync(command);
 
             return result;
-        }
-        public async Task<bool> DeleteCompletedAsync(int orderId){
-            var db = new PgDatabaseManager(ConfigurationManager.ConnectionStrings["PostgreConnectionString"].ConnectionString);
-
-            List<NpgsqlCommand> commands = [];
-
-            var deleteFromCompleted = new NpgsqlCommand(SqlQueries.DeletedCompleted);
-            
-            deleteFromCompleted.Parameters.AddWithValue("@OrderId", orderId);
-            
-            var deleteFromOrders = new NpgsqlCommand(SqlQueries.DeleteOrder);
-            deleteFromOrders.Parameters.AddWithValue("@Id", orderId);
-
-            commands.Add(deleteFromOrders);
-            commands.Add(deleteFromCompleted);
-
-
-            var res = await db.ExecuteCommandAsync(commands);
-
-            if (res.Count() != commands.Count || res.Any(r => r == 0))
-            {
-                return false; 
-            }
-
-            return true;
         }
     }
 }
